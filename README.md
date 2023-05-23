@@ -9,6 +9,7 @@
 Este Kanban Board - KBB é uma aplicação fullstack web que está sendo desenvolvida como trabalho prático da disciplina de Programação para Web - UFSC.
 
 A aplicação consiste em uma ferramenta ágil de gerenciamento de projetos, criada para ajudar a visualizar, limitar o trabalho em andamento e maximizar a sua eficiência. Ela pode ser usada para gerenciar o trabalho em nível pessoal ou organizacional. Os quadros Kanban representam visualmente o trabalho em vários estágios de um processo usando cartões para representar itens de trabalho e colunas para representar cada estágio do processo. 
+
 Nesta aplicação existirá quatro colunas: To Do, In Progress, Testing e Done. Nela o usuário fará o seu cadastro e login e poderá criar quadros de atividades, compartilhá-los e também acessar quadros compartilhados com ele.
 
 # Requisitos da Aplicação

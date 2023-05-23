@@ -1,81 +1,56 @@
-# Kanban Board
+# Kanban Board - KBB
 
 ![Kanban Board](https://github.com/tuca222/KanbanBoardWeb/blob/main/board.jpg)
 
-# Sobre o projeto
+# Sobre o Projeto
  
  (LINK DA APLICACAO RODANDO)
 
-Este Kanban Board é uma aplicação fullstack web que está sendo desenvolvida como trabalaho prático da disciplina de Programação para Web.
+Este Kanban Board - KBB é uma aplicação fullstack web que está sendo desenvolvida como trabalho prático da disciplina de Programação para Web - UFSC.
 
-A aplicação consiste em uma ferramenta ágil de gerenciamento de projetos projetada para ajudar a visualizar o trabalho, limitar o trabalho em andamento e maximizar a eficiência, usada para gerenciar o trabalho em nível pessoal ou organizacional. Os quadros Kanban representam visualmente o trabalho em vários estágios de um processo usando cartões para representar itens de trabalho e colunas para representar cada estágio do processo.
+A aplicação consiste em uma ferramenta ágil de gerenciamento de projetos, criada para ajudar a visualizar, limitar o trabalho em andamento e maximizar a sua eficiência. Ela pode ser usada para gerenciar o trabalho em nível pessoal ou organizacional. Os quadros Kanban representam visualmente o trabalho em vários estágios de um processo usando cartões para representar itens de trabalho e colunas para representar cada estágio do processo. 
+Nesta aplicação existirá quatro colunas: To Do, In Progress, Testing e Done. Nela o usuário fará o seu cadastro e login e poderá criar quadros de atividades, compartilhá-los e também acessar quadros compartilhados com ele.
 
+# Requisitos da Aplicação
+ - A aplicação deve ser acessível apenas após autenticação.
+ - A aplicação deve permitir o cadastro de novos usuários.
+ - Quando autenticado, o usuário deve poder atualizar seu cadastro.
+ - Deve existir alguma base de dados no back-end.
+ - Deve ser possível compartilhar dados entre usuários.
+ - A aplicação deve ficar disponível 24/7 em algum servidor da Nuvem UFSC ou externo à UFSC.
+ - O front-end deve ser responsivo (desktop e mobile).
 
-# Requisitos da aplicação
+## Layout Web
 
-## Layout mobile
-![Mobile 1](https://github.com/acenelio/assets/raw/main/sds1/mobile1.png) ![Mobile 2](https://github.com/acenelio/assets/raw/main/sds1/mobile2.png)
+ (IMAGEM DA APLICAÇÃO WEB)
 
-## Layout web
-![Web 1](https://github.com/acenelio/assets/raw/main/sds1/web1.png)
+## Layout Mobile
 
-![Web 2](https://github.com/acenelio/assets/raw/main/sds1/web2.png)
+ (IMAGEM DA APLICAÇÃO MOBILE)
 
-## Modelo conceitual
-![Modelo Conceitual](https://github.com/acenelio/assets/raw/main/sds1/modelo-conceitual.png)
+# Tecnologias Utilizadas
+## BackEnd
+- Javascript
+- Node.js
+- Express.js
+- MongoDB
 
-# Tecnologias utilizadas
-## Back end
-- Java
-- Spring Boot
-- JPA / Hibernate
-- Maven
-## Front end
+## FrontEnd
 - HTML / CSS / JS / TypeScript
 - ReactJS
-- React Native
-- Apex Charts
-- Expo
-## Implantação em produção
-- Back end: Heroku
-- Front end web: Netlify
-- Banco de dados: Postgresql
 
-# Como executar o projeto
+# Grupo
 
-## Back end
-Pré-requisitos: Java 11
+- Arthur Lorenzetti da Rosa 
 
-```bash
-# clonar repositório
-git clone https://github.com/devsuperior/sds1-wmazoni
+    https://github.com/tuca222
+- Jacqueline Correia Beber 
 
-# entrar na pasta do projeto back end
-cd backend
+    https://github.com/JacquelineBeber
+- Lucas Ladwig
 
-# executar o projeto
-./mvnw spring-boot:run
-```
+    https://github.com/lucasladwig
+- Pedro Ruschel Bressan
 
-## Front end web
-Pré-requisitos: npm / yarn
+    https://github.com/pedro-rb
 
-```bash
-# clonar repositório
-git clone https://github.com/devsuperior/sds1-wmazoni
-
-# entrar na pasta do projeto front end web
-cd front-web
-
-# instalar dependências
-yarn install
-
-# executar o projeto
-yarn start
-```
-
-# Autor
-
-Wellington Mazoni de Andrade
-
-https://www.linkedin.com/in/wmazoni

@@ -3,12 +3,15 @@
 ![Kanban Board](https://github.com/tuca222/KanbanBoardWeb/blob/main/board.jpg)
 
 # Sobre o projeto
+ 
+ (LINK DA APLICACAO RODANDO)
 
-https://wmazoni-sds1.netlify.app
+Este Kanban Board é uma aplicação fullstack web que está sendo desenvolvida como trabalaho prático da disciplina de Programação para Web.
 
-Big Game Survey é uma aplicação full stack web e mobile construída durante a 1ª edição da **Semana DevSuperior** (#sds1), evento organizado pela [DevSuperior](https://devsuperior.com "Site da DevSuperior").
+A aplicação consiste em uma ferramenta ágil de gerenciamento de projetos projetada para ajudar a visualizar o trabalho, limitar o trabalho em andamento e maximizar a eficiência, usada para gerenciar o trabalho em nível pessoal ou organizacional. Os quadros Kanban representam visualmente o trabalho em vários estágios de um processo usando cartões para representar itens de trabalho e colunas para representar cada estágio do processo.
 
-A aplicação consiste em uma pesquisa de preferência de games, onde os dados são coletados no app mobile, e depois são listados no app web, que também apresenta um dashboard com gráficos baseados nestes dados.
+
+# Requisitos da aplicação
 
 ## Layout mobile
 ![Mobile 1](https://github.com/acenelio/assets/raw/main/sds1/mobile1.png) ![Mobile 2](https://github.com/acenelio/assets/raw/main/sds1/mobile2.png)

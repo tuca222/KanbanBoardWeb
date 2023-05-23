@@ -1,5 +1,6 @@
 # Kanban Board
-[![NPM](https://img.shields.io/npm/l/react)](https://github.com/tuca222/KanbanBoardWeb/blob/main/LICENSE) 
+
+![Kanban Board](https://github.com/tuca222/KanbanBoardWeb/blob/main/board.jpg)
 
 # Sobre o projeto
 

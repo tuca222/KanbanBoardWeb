@@ -1,9 +1,15 @@
 import { Router } from 'express';
+import { createUserController } from '../Application/UseCases/CreateUser';
 
 const router = Router();
 
+router.get('/', (request, response) => {
+  return response.status(200).json({msg: "Bem vindo a API"})
+})
+
+//rota cadastro de usuario
 router.post('/users', (request, response) => {
-  return response.status(201).json({msg: 'Rota /users POST'})
+  return createUserController.handle(request, response);
 });
 
 export {router};

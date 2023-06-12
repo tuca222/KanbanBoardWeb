@@ -4,12 +4,16 @@ const jwt = require('jsonwebtoken');
 
 export class CreateUserToken implements ICreateUserToken {
   execute(id: string): Promise<string> {
-    const token = jwt.sign(
-      id,
-      process.env.TOKEN_SECRET,
-      { expiresIn: '24h' }
+    try{
+      const token = jwt.sign(
+        {id},
+        process.env.TOKEN_SECRET,
+        { expiresIn: '24h' }
     )
     return token;
-  }
 
+    } catch(Error){
+      throw new Error('Erro inesperado na criação do token');
+    }
+  }
 }

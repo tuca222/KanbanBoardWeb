@@ -1,5 +1,5 @@
-import { uuid } from 'uuidv4';
-import { Cards } from "./Cards";
+const { v4: uuidv4 } = require('uuid');
+import { Card } from "./Card";
 
 
 export class Board{
@@ -9,13 +9,13 @@ export class Board{
   public compartilhado: boolean;
   public numeroAcessos: number;
   public nomeCriador: string;
-  public cards: Array<Cards>;
+  public cards: Array<Card>;
 
   constructor(props: Omit<Board, 'id'>, id?: string) {
     Object.assign(this, props)
     
     if(!id){
-      this.id = uuid();
+      this.id = uuidv4();
     }
   }
 };

@@ -22,16 +22,15 @@ export class CreateUserController {
     };
 
     try{
-      const responseUseCase = await this.createUserUseCase.execute({
+      const token = await this.createUserUseCase.execute({
         name, 
         email, 
         senha,
       });
 
-      return responseUseCase
+      return response.status(201).json({msg: "Usuário criado com sucesso!", token});
     } catch (Error) {
-      return response.status(422).json({msg: 'Usuário ja existente'}) ||
-             response.status(400).json({msg: 'Erro inesperado'});
+      return response.status(422).json({msg: Error.message});
     };
   }
 }

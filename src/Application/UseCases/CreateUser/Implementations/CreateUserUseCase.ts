@@ -13,23 +13,25 @@ export class CreateUserUseCase implements ICreateUserUseCase{
     private createUserToken: ICreateUserToken,
   ) {}
 
-  async execute(data: ICreateUserRequestDTO) {
+  async execute(data: ICreateUserRequestDTO): Promise<string> {
     try{
-      const userExiste = await this.usersRepository.findByEmail(data.email)
+      const userExiste = await this.usersRepository.findByEmail(data.email);
 
       if (userExiste) {
-        return response.status(422).json({msg: 'Usuário com email já cadastrado!'});
+        throw new Error('Usuário com este email ja existe!');
       }
       
-      data.senha = (await this.createUserCryptoPassword.execute(data.senha)).toString()
-      const user = new User(data);
-      const idNewUser = await this.usersRepository.save(user);
-      console.log(idNewUser);
-      this.createUserToken.execute(idNewUser);
-      return response.status(201).json({msg: 'Usuário Criado com sucesso!'});
+      data.senha = (await this.createUserCryptoPassword.execute(data.senha)).toString();
 
-    } catch(error) {
-      return response.status(500).json({msg: 'Erro inesperado'});
+      const user = new User(data);
+      await this.usersRepository.save(user);
+
+      const userCriado = await this.usersRepository.findByEmail(data.email)
+      const token = (await this.createUserToken.execute(userCriado._id)).toString();
+      return token;
+
+    } catch(Error) {
+      throw Error;
     }
   }
 }

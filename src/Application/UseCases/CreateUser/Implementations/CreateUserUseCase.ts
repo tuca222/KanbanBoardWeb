@@ -1,4 +1,3 @@
-import { response } from "express";
 import { User } from "../../../../Core/Entities/User";
 import { IUsersRepository } from "../../../../Core/Repositories/IUsersRepository";
 import { ICreateUserRequestDTO } from ".././Interfaces/ICreateUserDTO";
@@ -26,8 +25,7 @@ export class CreateUserUseCase implements ICreateUserUseCase{
       const user = new User(data);
       await this.usersRepository.save(user);
 
-      const userCriado = await this.usersRepository.findByEmail(data.email)
-      const token = (await this.createUserToken.execute(userCriado._id)).toString();
+      const token = (await this.createUserToken.execute(user._id)).toString();
       return token;
 
     } catch(Error) {

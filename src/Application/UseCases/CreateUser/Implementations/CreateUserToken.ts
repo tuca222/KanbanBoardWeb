@@ -3,7 +3,7 @@ import { ICreateUserToken } from "../Interfaces/ICreateUserToken";
 const jwt = require('jsonwebtoken');
 
 export class CreateUserToken implements ICreateUserToken {
-  execute(id: string): Promise<string> {
+  async execute(id: string): Promise<string> {
     try{
       const token = jwt.sign(
         {id},
@@ -11,7 +11,6 @@ export class CreateUserToken implements ICreateUserToken {
         { expiresIn: '24h' }
     )
     return token;
-
     } catch(Error){
       throw new Error('Erro inesperado na criação do token');
     }

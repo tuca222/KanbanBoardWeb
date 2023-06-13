@@ -4,7 +4,7 @@ import { ICreateUserCryptoPassword } from "../Interfaces/ICreateUserCryptoPasswo
 const crypto = require('crypto-js');
 
 export class CreateUserCryptoPassword implements ICreateUserCryptoPassword{
-  execute(password: string): Promise<string> {
+  async execute(password: string): Promise<string> {
     try {
       const senhaCriptografada = crypto.AES.encrypt(
         password,
@@ -12,8 +12,7 @@ export class CreateUserCryptoPassword implements ICreateUserCryptoPassword{
       );
       return senhaCriptografada;
     } catch(Error) {
-      console.log(Error.msg);
-      throw new Error(Error.msg);
+      throw new Error('Problema inesperado na criptografia de senha!');
     }
   }
 }

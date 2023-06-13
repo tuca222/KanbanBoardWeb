@@ -1,4 +1,4 @@
-import { Board } from "../../Core/Entities/Board";
+import { Board } from "../../../Core/Entities/Board";
 const mongoose = require('mongoose');
 
 const Users = mongoose.model('Users', {

@@ -9,7 +9,7 @@ router.get('/', (request, response) => {
 
 //rota cadastro de usuario
 router.post('/users', (request, response) => {
-  return createUserController.handle(request, response);
+  return createUserController.handle(request, response).then().catch();
 });
 
 export {router};

@@ -3,16 +3,14 @@ import { IUsersRepository } from "../../../../Core/Repositories/IUsersRepository
 import { ICreateUserRequestDTO } from ".././Interfaces/ICreateUserDTO";
 import { ICreateUserUseCase } from ".././Interfaces/ICreateUserUseCase";
 import { ICreateUserCryptoPassword } from "../Interfaces/ICreateUserCryptoPassword";
-import { ICreateUserToken } from "../Interfaces/ICreateUserToken";
 
 export class CreateUserUseCase implements ICreateUserUseCase{
   constructor(
     private usersRepository: IUsersRepository,
     private createUserCryptoPassword: ICreateUserCryptoPassword,
-    private createUserToken: ICreateUserToken,
   ) {}
 
-  async execute(data: ICreateUserRequestDTO): Promise<string> {
+  async execute(data: ICreateUserRequestDTO): Promise<void> {
     try{
       const userExiste = await this.usersRepository.findByEmail(data.email);
 
@@ -21,12 +19,8 @@ export class CreateUserUseCase implements ICreateUserUseCase{
       }
       
       data.senha = (await this.createUserCryptoPassword.execute(data.senha)).toString();
-
       const user = new User(data);
       await this.usersRepository.save(user);
-
-      const token = (await this.createUserToken.execute(user._id)).toString();
-      return token;
 
     } catch(Error) {
       throw Error;

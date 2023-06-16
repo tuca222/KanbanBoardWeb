@@ -1,14 +1,14 @@
 import { MongoUsersRepository } from "../../../Infra/Repositories/MongoUsersRepository";
+import { CryptPasswordService } from "../../Services/Implementations/CryptPasswordService";
 import { CreateUserController } from "./Implementations/CreateUserController";
-import { CreateUserCryptoPassword } from "./Implementations/CreateUserCryptoPassword";
 import { CreateUserUseCase } from "./Implementations/CreateUserUseCase";
 
 const mongoUsersRepository = new MongoUsersRepository();
-const createUserCryptoPassword = new CreateUserCryptoPassword();
+const cryptPasswordService = new CryptPasswordService();
 
 const createUserUseCase = new CreateUserUseCase(
   mongoUsersRepository,
-  createUserCryptoPassword
+  cryptPasswordService
 );
 
 const createUserController = new CreateUserController(createUserUseCase);

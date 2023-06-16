@@ -14,6 +14,7 @@ export class Card{
   public conteudo: string;
   public dataCriacao: string;
   public emailUserCriador: string;
+  public editores: Array<string>;
   public status: Status;
 
   constructor(props: Omit<Card, 'id'>, id?: string) {

@@ -8,9 +8,9 @@ export class CreateUserController {
 
   async handle(request: Request, response: Response): Promise<Response> {
     try{  
-      const {name, email, senha, senhaConfirmada} = request.body;
-      if (!name){
-        return response.status(422).json({msg: 'O nome é obrigatório!'});
+      const {userName, email, senha, senhaConfirmada} = request.body;
+      if (!userName){
+        return response.status(422).json({msg: 'O nome de usuário é obrigatório!'});
       };
       if (!email){
         return response.status(422).json({msg: 'O email é obrigatório!'});
@@ -23,11 +23,10 @@ export class CreateUserController {
       };
 
       await this.createUserUseCase.execute({
-        name,
+        userName,
         email,
         senha,
       });
-
       return response.status(201).json({msg: "Usuário criado com sucesso!"});
     } catch (Error) {
       throw Error;

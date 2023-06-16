@@ -3,7 +3,7 @@ import { Board } from "./Board";
 
 export class User{
   public readonly _id?: string;
-  public name: string;
+  public userName: string;
   public email: string;
   public senha: string;
   public boards: Array<Board>;
@@ -17,7 +17,7 @@ export class User{
       dataCriacao: Date(),
       compartilhado: false,
       numeroAcessos: 0,
-      nomeCriador: this.name,
+      nomeCriador: this.userName,
       cards: [{
         id: uuidv4(),
         nomeTarefa: "Tarefa exemplo ToDo",
@@ -25,6 +25,7 @@ export class User{
         conteudo: "Passo a passo da tarefa",
         dataCriacao: Date(),
         emailUserCriador: this.email,
+        editores: [this.userName],
         status: 1,
       }, {
         id: uuidv4(),
@@ -33,6 +34,7 @@ export class User{
         conteudo: "Passo a passo da tarefa",
         dataCriacao: Date(),
         emailUserCriador: this.email,
+        editores: [this.userName],
         status: 2,
       }, {
         id: uuidv4(),
@@ -41,6 +43,7 @@ export class User{
         conteudo: "Passo a passo da tarefa",
         dataCriacao: Date(),
         emailUserCriador: this.email,
+        editores: [this.userName],
         status: 3,
       }, {
         id: uuidv4(),
@@ -49,6 +52,7 @@ export class User{
         conteudo: "Passo a passo da tarefa realizada.",
         dataCriacao: Date(),
         emailUserCriador: this.email,
+        editores: [this.userName],
         status: 4,
       }]
     }]

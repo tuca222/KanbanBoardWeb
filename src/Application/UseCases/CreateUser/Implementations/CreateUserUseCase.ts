@@ -1,13 +1,13 @@
 import { User } from "../../../../Core/Entities/User";
 import { IUsersRepository } from "../../../../Core/Repositories/IUsersRepository";
+import { ICryptPasswordService } from "../../../Services/Interfaces/ICryptPasswordService";
 import { ICreateUserRequestDTO } from ".././Interfaces/ICreateUserDTO";
 import { ICreateUserUseCase } from ".././Interfaces/ICreateUserUseCase";
-import { ICreateUserCryptoPassword } from "../Interfaces/ICreateUserCryptoPassword";
 
 export class CreateUserUseCase implements ICreateUserUseCase{
   constructor(
     private usersRepository: IUsersRepository,
-    private createUserCryptoPassword: ICreateUserCryptoPassword,
+    private cryptPasswordService: ICryptPasswordService,
   ) {}
 
   async execute(data: ICreateUserRequestDTO): Promise<void> {
@@ -18,7 +18,7 @@ export class CreateUserUseCase implements ICreateUserUseCase{
         throw new Error('Usuário com este email ja existe!');
       }
       
-      data.senha = (await this.createUserCryptoPassword.execute(data.senha)).toString();
+      data.senha = (await this.cryptPasswordService.cryptPassword(data.senha)).toString();
       const user = new User(data);
       await this.usersRepository.save(user);
 

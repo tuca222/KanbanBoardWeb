@@ -17,7 +17,7 @@ export class MongoUsersRepository implements IUsersRepository{
   async save(user: User): Promise<void> {
     try{
       this.userSchema.create({
-        name: user.name,
+        userName: user.userName,
         email: user.email,
         senha: user.senha,
         boards: user.boards

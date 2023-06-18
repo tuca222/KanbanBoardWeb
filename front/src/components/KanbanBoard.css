@@ -1,0 +1,29 @@
+.kanban-board {
+  display: flex;
+  justify-content: space-around;
+  background-color: #000000;
+}
+
+.kanban-column {
+  width: 300px;
+  padding: 8px;
+  background-color: #afafaf;
+  border-radius: 4px;
+}
+
+.card-list {
+  min-height: 100px;
+  margin-top: 8px;
+  background-color: #afafaf;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 4px;
+  padding: 8px;
+  margin-bottom: 8px;
+}

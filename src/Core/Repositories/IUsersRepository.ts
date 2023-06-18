@@ -1,9 +1,7 @@
-import mongoose from 'mongoose';
 import { User } from '../Entities/User'
-const Users = require('../../Infra/Repositories/Users');
-
 
 export interface IUsersRepository{
+  findByUserName(userName: string): Promise<User>;
   findByEmail(email: string): Promise<User>;
   save(user: User): Promise<void>;
 }

@@ -1,5 +1,4 @@
 export interface ILoginUserRequestDTO {
-  userName: string,
+  email: string,
   senha: string,
-  confirmSenha: string,
 }

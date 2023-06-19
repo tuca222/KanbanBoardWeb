@@ -1,30 +1,39 @@
-import React from 'react';
+import React from "react";
+import './Card.css'
 
-const Card = ({ card, isSelected, onSelectCard, onCardChange }) => {
+const Card = ({ id, name, description, content, index, isSelected, onSelectCard, onCardChange }) => {
   const handleClick = () => {
-    onSelectCard(card.id);
+    onSelectCard(id);
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    onCardChange(card.id, name, value);
+    onCardChange(id, name, value);
   };
 
   return (
-    <div className={`card ${isSelected ? 'selected' : ''}`} onClick={handleClick}>
+    <div
+      className={`card ${isSelected ? 'selected' : ''}`}
+      onClick={handleClick}
+    >
       <input
         type="text"
         name="name"
-        value={card.name}
+        value={name}
         onChange={handleInputChange}
       />
       <input
         type="text"
         name="description"
-        value={card.description}
+        value={description}
         onChange={handleInputChange}
       />
-      <textarea name="content" value={card.content} onChange={handleInputChange} />
+      <input
+        type="text"
+        name="content"
+        value={content}
+        onChange={handleInputChange}
+      />
     </div>
   );
 };

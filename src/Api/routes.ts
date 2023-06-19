@@ -5,6 +5,9 @@ const router = Router();
 //----------ROTAS----------
 //rota publica (Bem vindo)
 router.get('/', (request, response) => {
+  if (request.session.authenticated) {
+    response.status(200).json({msg: 'Parabéns usuário autenticado!'});
+  };
   return response.status(200).json({msg: "Bem vindo a API - Esta rota é publica!"})
 });
 
@@ -14,16 +17,15 @@ router.post('/users', (request, response) => {
   console.log(verifica);
   if (verifica){
     console.log('entrou na verificacao')
-    return response.status(200).json({authenticated: true});
+    response.status(200).json({authenticated: true});
   }
-  else{
+  else {
     createUserController.handle(request, response).then(() =>{
-    request.session.authenticated = true;
     console.log(request.session.authenticated);
     console.log('autenticou');
     }).catch((Error) => {
       console.log('erro de registro')
-      return response.status(422).json({msg: Error.message});
+      response.status(422).json({msg: Error.message});
     });
   }
 });
@@ -31,9 +33,9 @@ router.post('/users', (request, response) => {
 //rota privada (teste)
 router.get('/private', (request, response) => {
   if (request.session.authenticated) {
-    return response.status(200).json({msg: 'Parabéns usuário autenticado!'});
+    response.status(200).json({msg: 'Parabéns usuário autenticado!'});
   };
-  return response.status(401).json({msg: 'Autenticação negada, faça seu login!'});
+  response.status(401).json({msg: 'Autenticação negada, faça seu login!'});
 });
 
 //rota privada (Logout)

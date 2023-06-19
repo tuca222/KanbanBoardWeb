@@ -6,7 +6,7 @@ export class CreateUserController {
     private createUserUseCase: ICreateUserUseCase
   ) {}
 
-  async handle(request: Request, response: Response): Promise<Response> {
+  async handle(request, response): Promise<Response> {
     try{  
       const {userName, email, senha, senhaConfirmada} = request.body;
       if (!userName){
@@ -27,6 +27,7 @@ export class CreateUserController {
         email,
         senha,
       });
+      request.session.authenticated = true;
       return response.status(201).json({msg: "Usuário criado com sucesso!"});
     } catch (Error) {
       throw Error;

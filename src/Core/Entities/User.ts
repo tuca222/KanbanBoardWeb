@@ -16,7 +16,6 @@ export class User{
       titulo: "Board Exemplo",
       dataCriacao: Date(),
       compartilhado: false,
-      numeroAcessos: 0,
       nomeCriador: this.userName,
       cards: [{
         id: uuidv4(),

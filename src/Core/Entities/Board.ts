@@ -7,7 +7,6 @@ export class Board{
   public titulo: string;
   public dataCriacao: string;
   public compartilhado: boolean;
-  public numeroAcessos: number;
   public nomeCriador: string;
   public cards: Array<Card>;
 

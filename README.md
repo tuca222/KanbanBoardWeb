@@ -1,12 +1,14 @@
-# Kanban Board - KBB
+# Kanban Board
 
 ![Kanban Board](https://github.com/tuca222/KanbanBoardWeb/blob/main/board.jpg)
 
 # Sobre o Projeto
  
- (LINK DA APLICACAO RODANDO)
+ Aplicação: (LINK DA APLICACAO RODANDO)
+ 
+ Repositório: https://github.com/tuca222/KanbanBoardWeb
 
-Este Kanban Board - KBB é uma aplicação fullstack web que está sendo desenvolvida como trabalho prático da disciplina de Programação para Web - UFSC.
+Este Kanban Board é uma aplicação fullstack web que está sendo desenvolvida como trabalho prático da disciplina de Programação para Web - UFSC.
 
 A aplicação consiste em uma ferramenta ágil de gerenciamento de projetos, criada para ajudar a visualizar, limitar o trabalho em andamento e maximizar a sua eficiência. Ela pode ser usada para gerenciar o trabalho em nível pessoal ou organizacional. Os quadros Kanban representam visualmente o trabalho em vários estágios de um processo usando cartões para representar itens de trabalho e colunas para representar cada estágio do processo. 
 
@@ -42,16 +44,23 @@ Nesta aplicação existirá quatro colunas: To Do, In Progress, Testing e Done. 
 
 # Grupo
 
-- Arthur Lorenzetti da Rosa 
+- Arthur Lorenzetti da Rosa
 
-    https://github.com/tuca222
-- Jacqueline Correia Beber 
+    - Matrícula: 19200621
 
-    https://github.com/JacquelineBeber
+    - Github: https://github.com/tuca222
+- Jacqueline Correia Beber
+
+    - Matrícula: 19200634
+
+    - Github: https://github.com/JacquelineBeber
 - Lucas Ladwig
 
-    https://github.com/lucasladwig
+    - Matrícula: 22100910
+
+    - Github: https://github.com/lucasladwig
 - Pedro Ruschel Bressan
 
-    https://github.com/pedro-rb
+    - Matrícula: 22100920
 
+    - Github: https://github.com/pedro-rb

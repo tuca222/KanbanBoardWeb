@@ -1,5 +1,5 @@
 import { ILoginUserRequestDTO } from "./ILoginUserRequestDTO";
 
 export interface ILoginUserUseCase {
-  execute(data: ILoginUserRequestDTO)
+  execute(data: ILoginUserRequestDTO): Promise<void>
 }

@@ -1,4 +1,6 @@
+import { response } from "express";
 import { createUserController } from "../Application/UseCases/CreateUser";
+import { loginUserController } from "../Application/UseCases/LoginUser";
 const {Router} = require('express');
 const router = Router();
 
@@ -30,10 +32,18 @@ router.post('/users', (request, response) => {
   }
 });
 
+//rota login
+router.post('/login', (request, response) => {
+  if (request.session.authenticated) {
+    return response.status(200).json({msg: 'Usuário já está autenticado!'});
+  };
+  loginUserController.handle(request, response);
+});
+
 //rota privada (teste)
 router.get('/private', (request, response) => {
   if (request.session.authenticated) {
-    response.status(200).json({msg: 'Parabéns usuário autenticado!'});
+    return response.status(200).json({msg: 'Parabéns usuário autenticado!'});
   };
   response.status(401).json({msg: 'Autenticação negada, faça seu login!'});
 });

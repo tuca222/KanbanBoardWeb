@@ -12,10 +12,14 @@ export class CreateUserUseCase implements ICreateUserUseCase{
 
   async execute(data: ICreateUserRequestDTO): Promise<void> {
     try{
-      const userExiste = await this.usersRepository.findByEmail(data.email);
+      const emailExiste = await this.usersRepository.findByEmail(data.email);
+      if (emailExiste) {
+        throw new Error('Usuário com este email já existe!');
+      }
 
-      if (userExiste) {
-        throw new Error('Usuário com este email ja existe!');
+      const userNameExiste = await this.usersRepository.findByUserName(data.userName)
+      if (userNameExiste) {
+        throw new Error('Nome de usuário já existe!')
       }
       
       data.senha = (await this.cryptPasswordService.cryptPassword(data.senha)).toString();

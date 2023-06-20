@@ -37,7 +37,9 @@ router.post('/login', (request, response) => {
   if (request.session.authenticated) {
     return response.status(200).json({msg: 'Usuário já está autenticado!'});
   };
-  loginUserController.handle(request, response);
+  loginUserController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: Error.message});
+  });
 });
 
 //rota privada (teste)

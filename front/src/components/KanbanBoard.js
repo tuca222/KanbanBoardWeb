@@ -38,6 +38,27 @@ const KanbanBoard = () => {
     },
   });
 
+  //
+  const [newCardName, setNewCardName] = useState('');
+
+  const handleAddCard = () => {
+    const newCard = {
+      id: `card${Date.now()}`, // Gerar um ID único para o novo card
+      name: newCardName,
+      description: '',
+      content: '',
+      index: columns.column1.cards.length, // Definir o índice com base na quantidade atual de cards
+    };
+  
+    setColumns((prevColumns) => {
+      const updatedColumns = { ...prevColumns };
+      updatedColumns.column1.cards.push(newCard); // Adicionar o novo card à coluna "column1"
+      return updatedColumns;
+    });
+  
+    setNewCardName('');
+  };
+  
   const [selectedCard, setSelectedCard] = useState(null);
 
   const handleDragEnd = (result) => {
@@ -103,6 +124,16 @@ const KanbanBoard = () => {
           {Object.values(columns).map((column) => (
             <div className="kanban-column" key={column.id}>
               <h3>{column.title}</h3>
+              {column.id === 'column1' && (
+              <div>
+                <input
+                  type="text"
+                  value={newCardName}
+                  onChange={(e) => setNewCardName(e.target.value)}
+                />
+                <button onClick={handleAddCard}>Adicionar Card</button>
+              </div>
+            )}
               <Droppable droppableId={column.id}>
                 {(provided) => (
                   <div

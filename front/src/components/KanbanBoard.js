@@ -62,44 +62,61 @@ const KanbanBoard = () => {
   const [selectedCard, setSelectedCard] = useState(null);
 
   const handleDragEnd = (result) => {
+    // Mover cartões nas colunas
     const { source, destination } = result;
-
+  
     if (!destination) return;
-
-    if (
-      source.droppableId === destination.droppableId &&
-      source.index === destination.index
-    ) {
-      return;
-    }
-
+  
     const sourceColumnId = source.droppableId;
     const destinationColumnId = destination.droppableId;
     const sourceColumn = columns[sourceColumnId];
     const destinationColumn = columns[destinationColumnId];
-    const sourceCards = Array.from(sourceColumn.cards);
-    const destinationCards = Array.from(destinationColumn.cards);
-    const [draggedCard] = sourceCards.splice(source.index, 1);
-
+  
     if (sourceColumnId === destinationColumnId) {
+      // Movendo dentro da mesma coluna
+      const sourceCards = Array.from(sourceColumn.cards);
+      const [draggedCard] = sourceCards.splice(source.index, 1);
       sourceCards.splice(destination.index, 0, draggedCard);
+  
+      setColumns((prevColumns) => ({
+        ...prevColumns,
+        [sourceColumnId]: {
+          ...prevColumns[sourceColumnId],
+          cards: sourceCards.map((card, index) => ({
+            ...card,
+            index,
+          })),
+        },
+      }));
     } else {
-      destinationCards.splice(destination.index, 0, { ...draggedCard });
+      // Movendo para uma coluna diferente
+      const sourceCards = Array.from(sourceColumn.cards);
+      const destinationCards = Array.from(destinationColumn.cards);
+      const [draggedCard] = sourceCards.splice(source.index, 1);
+      destinationCards.splice(destination.index, 0, {
+        ...draggedCard,
+        index: destination.index,
+      });
+  
+      setColumns((prevColumns) => ({
+        ...prevColumns,
+        [sourceColumnId]: {
+          ...prevColumns[sourceColumnId],
+          cards: sourceCards.map((card, index) => ({
+            ...card,
+            index,
+          })),
+        },
+        [destinationColumnId]: {
+          ...prevColumns[destinationColumnId],
+          cards: destinationCards.map((card, index) => ({
+            ...card,
+            index,
+          })),
+        },
+      }));
     }
-
-    setColumns((prevColumns) => {
-      const updatedColumns = { ...prevColumns };
-      updatedColumns[sourceColumnId].cards = sourceCards.map((card, index) => ({
-        ...card,
-        index,
-      }));
-      updatedColumns[destinationColumnId].cards = destinationCards.map((card, index) => ({
-        ...card,
-        index,
-      }));
-      return updatedColumns;
-    });
-
+  
     setSelectedCard(null);
   };
 

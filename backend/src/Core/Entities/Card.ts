@@ -12,9 +12,9 @@ export class Card{
   public nomeTarefa: string;
   public descricao: string;
   public conteudo: string;
-  public dataCriacao: string;
+  public dataInicio: string;
+  public dataFinalizacao: string;
   public emailUserCriador: string;
-  public editores: Array<string>;
   public status: Status;
 
   constructor(props: Omit<Card, 'id'>, id?: string) {

@@ -8,7 +8,7 @@ export class LoginUserUseCase implements ILoginUserUseCase {
     private usersRepository: IUsersRepository,
     private cryptPasswordService: ICryptPasswordService
   ){}
-  async execute(data: ILoginUserRequestDTO) {
+  async execute(data: ILoginUserRequestDTO): Promise<string> {
     try{
       const user = await this.usersRepository.findByEmail(data.email);
       if(!user){
@@ -18,6 +18,8 @@ export class LoginUserUseCase implements ILoginUserUseCase {
       if(senhaBD != data.senha){
         throw new Error('Senha incorreta!')
       }
+
+      return user._id;
     } catch (Error){
       throw Error;
     }

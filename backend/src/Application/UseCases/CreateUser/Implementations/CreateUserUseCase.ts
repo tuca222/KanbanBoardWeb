@@ -10,7 +10,7 @@ export class CreateUserUseCase implements ICreateUserUseCase{
     private cryptPasswordService: ICryptPasswordService,
   ) {}
 
-  async execute(data: ICreateUserRequestDTO): Promise<void> {
+  async execute(data: ICreateUserRequestDTO): Promise<string> {
     try{
       const emailExiste = await this.usersRepository.findByEmail(data.email);
       if (emailExiste) {
@@ -26,6 +26,8 @@ export class CreateUserUseCase implements ICreateUserUseCase{
       const user = new User(data);
       await this.usersRepository.save(user);
 
+      const newUserMongo = await this.usersRepository.findByEmail(user.email)
+      return newUserMongo._id;
     } catch(Error) {
       throw Error;
     }

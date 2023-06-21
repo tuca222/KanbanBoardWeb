@@ -22,13 +22,13 @@ export class CreateUserController {
         return response.status(422).json({msg: 'As senhas não coincidem!'});
       };
 
-      await this.createUserUseCase.execute({
+      const userId = await this.createUserUseCase.execute({
         userName,
         email,
         senha,
       });
       request.session.authenticated = true;
-      return response.status(201).json({msg: "Usuário criado com sucesso!"});
+      return response.status(201).json({userId: userId, msg: "Usuário criado com sucesso!"});
     } catch (Error) {
       throw Error;
     };

@@ -9,7 +9,6 @@ export class ReadUserUseCase implements IReadUserUseCase {
 
   async execute(userId: string): Promise<IReadUserUseCaseResponseDTO> {
     try{
-      console.log(userId);
       const userMongo = await this.usersRepository.findById(userId);
       if (!userMongo) {
         throw new Error('Usuário com este ID não encontrado!')

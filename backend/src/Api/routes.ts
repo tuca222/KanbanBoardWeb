@@ -13,9 +13,9 @@ import {authenticated}  from "./utils/authenticated";
 //                         para pagina inicial do usuario)
 router.get('/', (request, response) => {
   if (request.session.authenticated) {
-    return response.status(202).json({authenticated: true});
+    return response.status(202).json({authenticated: true, msg: "Página Inicial do User"});
   };
-  return response.status(202).json({authenticated: false})
+  return response.status(202).json({authenticated: false, msg: "Página Login"});
 });
 
 //rota login
@@ -47,12 +47,13 @@ router.post('/users', (request, response) => {
 //HTTP GET USER
 //rota privada (ReadUser) - página inicial do usuário
 router.get('/users/:id', authenticated, (request, response) => {
-  const {id} = request.params.id;
-  console.log(id)
   readUserController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro em buscar as informações do usuário: ' + Error.message});
   });
 });
+
+//HTTP PATCH USER
+//
 
 //rota privada (Logout)
 router.get('/users/logout', authenticated, (request, response) => {

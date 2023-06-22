@@ -7,8 +7,7 @@ export class ReadUserController {
 
   async handle(request, response): Promise<Response> {
     try{
-      const {id} = request.params.id;
-      console.log(id)
+      const id = request.params.id;
       const dados = await this.readUserUseCase.execute(id);
 
       return response.status(200).json({userName: dados.userName, email: dados.email});

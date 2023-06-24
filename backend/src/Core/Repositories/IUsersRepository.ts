@@ -1,3 +1,5 @@
+import { IUpdateUserBDComSenhaDTO } from '../../Application/UseCases/UpdateUser/Interfaces/IUpdateUserBDComSenhaDTO';
+import { IUpdateUserBDSemSenhaDTO } from '../../Application/UseCases/UpdateUser/Interfaces/IUpdateUserBDSemSenhadto';
 import { User } from '../Entities/User'
 
 export interface IUsersRepository{
@@ -6,4 +8,6 @@ export interface IUsersRepository{
   findByEmail(email: string): Promise<User>;
   save(user: User): Promise<void>;
   deleteUserById(userId: string): Promise<void>;
-}
+  updateUserBDComSenha(updateUserDTOComSenha: IUpdateUserBDComSenhaDTO): Promise<void>;
+  updateUserBDSemSenha(updateUserDTOSemSenha: IUpdateUserBDSemSenhaDTO): Promise<void>;
+};

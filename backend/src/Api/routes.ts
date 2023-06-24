@@ -1,4 +1,5 @@
 import { createUserController } from "../Application/UseCases/CreateUser";
+import { deleteUserController } from "../Application/UseCases/DeleteUser";
 import { loginUserController } from "../Application/UseCases/LoginUser";
 import { readUserController } from "../Application/UseCases/ReadUser";
 
@@ -52,10 +53,17 @@ router.get('/users/:id', authenticated, (request, response) => {
 });
 
 //HTTP PATCH USER
-//
+
+
+//HTTP DELETE USER
+router.delete('/users/:id', authenticated, (request, response) => {
+  deleteUserController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro em excluir usuário: ' + Error.message});
+  })
+})
 
 //rota privada (Logout)
-router.get('/users/logout', authenticated, (request, response) => {
+router.get('/logout', authenticated, (request, response) => {
   try{
     request.session.destroy();
     return response.status(200).json({msg: 'Sessão do usuário encerrada!'})

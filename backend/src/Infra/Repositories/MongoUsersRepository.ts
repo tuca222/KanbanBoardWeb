@@ -44,4 +44,12 @@ export class MongoUsersRepository implements IUsersRepository{
       throw new Error('Erro ao inserir um usuário no banco de dados');
     };
   };
+
+  async deleteUserById(userId: string): Promise<void> {
+    try{
+      await this.userSchema.deleteOne({ _id: userId });
+    } catch(Error) {
+      throw new Error('Usuário com este ID não encontrado!')
+    }
+  }
 };

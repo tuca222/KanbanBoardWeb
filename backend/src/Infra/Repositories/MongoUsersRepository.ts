@@ -46,27 +46,35 @@ export class MongoUsersRepository implements IUsersRepository{
       throw new Error('Erro ao inserir um usuário no banco de dados');
     };
   };
-
+  
   async updateUserBDComSenha(updateUserDTOComSenha: IUpdateUserBDComSenhaDTO): Promise<void> {
     try{
       await this.userSchema.findByIdAndUpdate(updateUserDTOComSenha.id, {
         userName: updateUserDTOComSenha.userName,
         email: updateUserDTOComSenha.email,
         senha: updateUserDTOComSenha.senha
-      })
+      });
     } catch (Error) {
       throw new Error('Erro ao atualizar o usuário no banco de dados');
-    }
-  }
+    };
+  };
   
   async updateUserBDSemSenha(updateUserDTOSemSenha: IUpdateUserBDSemSenhaDTO): Promise<void> {
     try{
       await this.userSchema.findByIdAndUpdate(updateUserDTOSemSenha.id, {
         userName: updateUserDTOSemSenha.userName,
         email: updateUserDTOSemSenha.email
-      })
+      });
     } catch (Error) {
       throw new Error('Erro ao atualizar o usuário no banco de dados');
-    }
-  }
+    };
+  };
+
+  async deleteUserById(userId: string): Promise<void> {
+    try{
+      await this.userSchema.deleteOne({ _id: userId });
+    } catch(Error) {
+      throw new Error('Usuário com este ID não encontrado!');
+    };
+  };
 };

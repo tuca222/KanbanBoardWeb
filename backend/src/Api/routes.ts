@@ -1,5 +1,6 @@
 import { request } from "express";
 import { createUserController } from "../Application/UseCases/CreateUser";
+import { deleteUserController } from "../Application/UseCases/DeleteUser";
 import { loginUserController } from "../Application/UseCases/LoginUser";
 import { readUserController } from "../Application/UseCases/ReadUser";
 import { updateUserController } from "../Application/UseCases/UpdateUser";
@@ -58,8 +59,15 @@ router.get('/users/:id', authenticated, (request, response) => {
 router.patch('/users/:id', authenticated, (request, response) => {
   updateUserController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Errro ao atualizar os dados do usuário: ' + Error.message});
-  })
-})
+  });
+});
+
+//HTTP DELETE USER
+router.delete('/users/:id', authenticated, (request, response) => {
+  deleteUserController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro em excluir usuário: ' + Error.message});
+  });
+});
 
 //rota privada (Logout)
 router.get('/logout', authenticated, (request, response) => {

@@ -7,6 +7,7 @@ export interface IUsersRepository{
   findByUserName(userName: string): Promise<User>;
   findByEmail(email: string): Promise<User>;
   save(user: User): Promise<void>;
-  updateUserBDComSenha(updateUserDTOComSenha: IUpdateUserBDComSenhaDTO): Promise<void>
-  updateUserBDSemSenha(updateUserDTOSemSenha: IUpdateUserBDSemSenhaDTO): Promise<void>
-}
+  deleteUserById(userId: string): Promise<void>;
+  updateUserBDComSenha(updateUserDTOComSenha: IUpdateUserBDComSenhaDTO): Promise<void>;
+  updateUserBDSemSenha(updateUserDTOSemSenha: IUpdateUserBDSemSenhaDTO): Promise<void>;
+};

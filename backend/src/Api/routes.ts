@@ -28,7 +28,6 @@ router.post('/login', (request, response) => {
   });
 });
 
-
 //----------ROTAS USERS----------
 //rota publica (cadastro de usuario)
 

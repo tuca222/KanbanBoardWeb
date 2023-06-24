@@ -1,10 +1,13 @@
+import { request } from "express";
 import { createUserController } from "../Application/UseCases/CreateUser";
 import { loginUserController } from "../Application/UseCases/LoginUser";
 import { readUserController } from "../Application/UseCases/ReadUser";
+import { updateUserController } from "../Application/UseCases/UpdateUser";
 
 const {Router} = require('express');
 const router = Router();
 import {authenticated}  from "./utils/authenticated";
+
 
 //----------ROTAS----------
 
@@ -52,10 +55,14 @@ router.get('/users/:id', authenticated, (request, response) => {
 });
 
 //HTTP PATCH USER
-//
+router.patch('/users/:id', authenticated, (request, response) => {
+  updateUserController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Errro ao atualizar os dados do usuário: ' + Error.message});
+  })
+})
 
 //rota privada (Logout)
-router.get('/users/logout', authenticated, (request, response) => {
+router.get('/logout', authenticated, (request, response) => {
   try{
     request.session.destroy();
     return response.status(200).json({msg: 'Sessão do usuário encerrada!'})

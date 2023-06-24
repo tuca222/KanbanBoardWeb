@@ -1,5 +1,5 @@
 import { IUpdateUserBDComSenhaDTO } from "../../Application/UseCases/UpdateUser/Interfaces/IUpdateUserBDComSenhaDTO";
-import { IUpdateUserBDSemSenhaDTO } from "../../Application/UseCases/UpdateUser/Interfaces/IUpdateUserBDSemSenhadto";
+import { IUpdateUserBDSemSenhaDTO } from "../../Application/UseCases/UpdateUser/Interfaces/IUpdateUserBDSemSenhaDTO";
 import { User } from "../../Core/Entities/User";
 const Users = require('./Schemas/Users');
 import { IUsersRepository } from "../../Core/Repositories/IUsersRepository";

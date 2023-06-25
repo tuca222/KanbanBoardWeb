@@ -9,14 +9,13 @@ export class ReadUserController {
     try{
       const id = request.params.id;
       if (id.length != 24){
-        throw new Error('ID inválido!')
-      }
+        return response.status(400).json({msg:'Parâmetro de rota incorreto!'});
+      };
       const dados = await this.readUserUseCase.execute(id);
 
       return response.status(200).json({userName: dados.userName, email: dados.email});
     } catch (Error) {
       throw Error;
-    }
-  }
-
+    };
+  };
 }

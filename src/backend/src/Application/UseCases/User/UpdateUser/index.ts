@@ -1,6 +1,6 @@
 import { MongoUserBoardsRepository } from "../../../../Infra/Repositories/MongoUserBoardsRepository";
 import { MongoUsersRepository } from "../../../../Infra/Repositories/MongoUsersRepository";
-import { BoardServices } from "../../../Services/Implementations/BoardServices";
+import { BoardService } from "../../../Services/Implementations/BoardService";
 import { CryptPasswordService } from "../../../Services/Implementations/CryptPasswordService";
 import { UpdateUserController } from "./Implementations/UpdateUserController";
 import { UpdateUserUseCase } from "./Implementations/UpdateUserUseCase";
@@ -8,7 +8,7 @@ import { UpdateUserUseCase } from "./Implementations/UpdateUserUseCase";
 const mongoUserRepository = new MongoUsersRepository();
 const mongoUserBoardsRepository = new MongoUserBoardsRepository()
 
-const boardServices = new BoardServices(mongoUserBoardsRepository)
+const boardServices = new BoardService(mongoUserBoardsRepository)
 
 const cryptPasswordService = new CryptPasswordService();
 

@@ -1,4 +1,4 @@
-import { request } from "express";
+import { request, response } from "express";
 
 const {Router} = require('express');
 const router = Router();
@@ -8,6 +8,7 @@ import { deleteUserController } from "../Application/UseCases/User/DeleteUser";
 import { loginUserController } from "../Application/UseCases/User/LoginUser";
 import { readUserController } from "../Application/UseCases/User/ReadUser";
 import { updateUserController } from "../Application/UseCases/User/UpdateUser";
+import { createBoardController } from "../Application/UseCases/Board/CreateBoard";
 
 
 //----------ROTAS----------
@@ -86,5 +87,13 @@ router.get('/private', (request, response) => {
   };
   response.status(401).json({authenticated: false});
 });
+
+// HTTP POST BOARD
+router.post('/users/:id/boards', authenticated, (request, response) => {
+  createBoardController.handle(request,response).catch((Error)  => {
+    return response.status(400).json({msg: 'Erro na criação do Board: ' + Error.message});
+  });
+});
+
 
 export {router}

@@ -1,4 +1,4 @@
-import { MongoUsersRepository } from "../../../Infra/Repositories/MongoUsersRepository";
+import { MongoUsersRepository } from "../../../../Infra/Repositories/MongoUsersRepository";
 import { DeleteUserController } from "./Implementations/DeleteUserController";
 import { DeleteUserUseCase } from "./Implementations/DeleteUserUseCase";
 

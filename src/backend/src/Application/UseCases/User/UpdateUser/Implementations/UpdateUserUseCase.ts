@@ -1,7 +1,7 @@
-import { IUsersRepository } from "../../../../Core/Repositories/IUsersRepository";
-import { ICryptPasswordService } from "../../../Services/Interfaces/ICryptPasswordService";
 import { IUpdateUserUseCase } from "../Interfaces/IUpdateUserUseCase";
 import { IUpdateUserRequestDTO } from "../Interfaces/IUpdateUserRequestDTO";
+import { IUsersRepository } from "../../../../../Core/Repositories/IUsersRepository";
+import { ICryptPasswordService } from "../../../../Services/Interfaces/ICryptPasswordService";
 
 export class UpdateUserUseCase implements IUpdateUserUseCase{
   constructor(

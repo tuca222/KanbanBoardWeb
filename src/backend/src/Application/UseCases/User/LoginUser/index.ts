@@ -1,5 +1,5 @@
-import { MongoUsersRepository } from "../../../Infra/Repositories/MongoUsersRepository";
-import { CryptPasswordService } from "../../Services/Implementations/CryptPasswordService";
+import { MongoUsersRepository } from "../../../../Infra/Repositories/MongoUsersRepository";
+import { CryptPasswordService } from "../../../Services/Implementations/CryptPasswordService";
 import { LoginUserController } from "./Implementations/LoginUserController";
 import { LoginUserUseCase } from "./Implementations/LoginUserUseCase";
 

@@ -1,4 +1,4 @@
-import { IUsersRepository } from "../../../../Core/Repositories/IUsersRepository";
+import { IUsersRepository } from "../../../../../Core/Repositories/IUsersRepository";
 import { IDeleteUserUseCase } from "../Interfaces/IDeleteUserUseCase";
 
 export class DeleteUserUseCase implements IDeleteUserUseCase {

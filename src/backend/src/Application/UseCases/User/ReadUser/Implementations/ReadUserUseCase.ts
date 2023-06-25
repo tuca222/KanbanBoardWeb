@@ -1,4 +1,4 @@
-import { IUsersRepository } from "../../../../Core/Repositories/IUsersRepository";
+import { IUsersRepository } from "../../../../../Core/Repositories/IUsersRepository";
 import { IReadUserUseCaseResponseDTO } from "../Interfaces/IReadUserResponseDTO";
 import { IReadUserUseCase } from "../Interfaces/IReadUserUseCase";
 

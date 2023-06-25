@@ -1,10 +1,13 @@
 import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import { Route, Routes } from 'react-router-dom';
 import Home from './components/pages/Home';
-
+import SignupForm from './components/pages/SignupForm';
+import LoginForm from './components/pages/LoginForm';
+import NotFoundPage from './components/pages/NotFoundPage';
 //import KanbanBoard from './components/layouts/KanbanBoard';
-// <KanbanBoard />
+
 
 const lightTheme = createTheme({
   palette: {
@@ -16,7 +19,12 @@ const App = () => {
   return (
     <ThemeProvider theme={lightTheme}>
       <CssBaseline />
-      <Home />
+        <Routes>
+          <Route path="/" element= {<Home />} />
+          <Route path="/SignupForm" element= {<SignupForm />} />
+          <Route path="/LoginForm" element= {<LoginForm />} />
+          <Route path="*" element= {<NotFoundPage />} />
+        </Routes>
     </ThemeProvider>
   );
 };

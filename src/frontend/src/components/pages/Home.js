@@ -1,8 +1,7 @@
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import LoginForm from '../blocks/LoginForm';
-
+import LoginForm from './LoginForm';
 
 export default function SignInSide() {
   const handleSubmit = (event) => {

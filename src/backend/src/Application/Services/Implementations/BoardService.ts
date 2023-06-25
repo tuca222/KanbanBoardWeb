@@ -1,12 +1,12 @@
 const { v4: uuidv4 } = require('uuid');
 import { Board } from "../../../Core/Entities/Board";
 import { User } from "../../../Core/Entities/User";
-import { IUserBoardsRepository } from "../../../Core/Repositories/IUserBoardsRepository";
+import { IUsersRepository } from "../../../Core/Repositories/IUsersRepository";
 import { IBoardService } from "../Interfaces/IBoardService";
 
 export class BoardService implements IBoardService{
   constructor(
-    private userBoardsRepository: IUserBoardsRepository
+    private usersRepository: IUsersRepository
   ){}
   
   async createBoard(user: User) {
@@ -46,7 +46,7 @@ export class BoardService implements IBoardService{
 
       user.boards.push(board);
 
-      await this.userBoardsRepository.updateEditor(user);
+      await this.usersRepository.saveUserUpdates(user);
 
       return board;
 
@@ -73,7 +73,7 @@ export class BoardService implements IBoardService{
         for (var j = 0; j <= (userBD.boards[i].editores.length - 1); j++){
           if (userBD.boards[i].editores[j] === userBD.userName){
             userBD.boards[i].editores[j] = newUserName;
-            await this.userBoardsRepository.updateEditor(userBD);
+            await this.usersRepository.saveUserUpdates(userBD);
             break
           };
         };
@@ -89,7 +89,7 @@ export class BoardService implements IBoardService{
         for (var j = 0; j <= (userBD.boards[i].cards.length - 1); j++){
           if (userBD.boards[i].cards[j].userNameCriador === userBD.userName){
             userBD.boards[i].cards[j].userNameCriador = newUserName;
-            await this.userBoardsRepository.updateCriadorCard(userBD);
+            await this.usersRepository.saveUserUpdates(userBD);
           };
         };
       };

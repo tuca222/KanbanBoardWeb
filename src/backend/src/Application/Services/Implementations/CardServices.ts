@@ -16,10 +16,10 @@ export class CardServices implements ICardService {
       }
       const cardProps = {
         id: uuidv4(),
-        nomeTarefa: "Tarefa exemplo ToDo",
-        descricao: "Exemplo de tarefa a fazer.",
-        conteudo: "Passo a passo da tarefa",
-        dataPrazo: null,
+        nomeTarefa: "Nova Tarefa ToDo",
+        descricao: "Tarefa a Fazer.",
+        conteudo: "Conteúdo da Tarefa",
+        dataPrazo: "--/--/----",
         userNameCriador: user.userName,
         status: 1,
       }

@@ -1,4 +1,5 @@
 import { UpdateUserUseCase } from "./UpdateUserUseCase";
+const ObjectId = require ('mongoose').Types.ObjectId;
 
 export class UpdateUserController{
   constructor (
@@ -8,7 +9,7 @@ export class UpdateUserController{
   async handle(request, response): Promise<Response>{
     try{
       const id = request.params.id;
-      if (id.length != 24){
+      if (!ObjectId.isValid(id)){
         throw new Error('ID inválido!')
       }
       const {userName, email, senha, senhaConfirmada} = request.body;

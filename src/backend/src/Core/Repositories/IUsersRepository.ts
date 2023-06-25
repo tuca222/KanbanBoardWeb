@@ -3,6 +3,7 @@ import { IUpdateUserBDSemSenhaDTO } from '../../Application/UseCases/User/Update
 import { User } from '../Entities/User'
 
 export interface IUsersRepository{
+  saveUserUpdates(user: User);
   findById(id: string): Promise<User>;
   findByUserName(userName: string): Promise<User>;
   findByEmail(email: string): Promise<User>;

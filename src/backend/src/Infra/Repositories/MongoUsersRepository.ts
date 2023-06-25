@@ -34,6 +34,14 @@ export class MongoUsersRepository implements IUsersRepository{
     };
   };
 
+  async saveUserUpdates(user: User) {
+    try{
+      await this.userSchema.findByIdAndUpdate(user._id, user)
+    } catch(Error){
+      throw new Error("Erro ao atualizar usuario no Banco!");
+    };
+  }
+
   async save(user: User): Promise<void> {
     try{
       await this.userSchema.create({

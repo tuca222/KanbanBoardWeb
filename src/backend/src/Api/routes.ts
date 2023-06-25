@@ -8,7 +8,9 @@ import { deleteUserController } from "../Application/UseCases/User/DeleteUser";
 import { loginUserController } from "../Application/UseCases/User/LoginUser";
 import { readUserController } from "../Application/UseCases/User/ReadUser";
 import { updateUserController } from "../Application/UseCases/User/UpdateUser";
+import { createCardController } from "../Application/UseCases/Card/CreateCard";
 import { createBoardController } from "../Application/UseCases/Board/CreateBoard";
+
 
 
 //----------ROTAS----------
@@ -45,7 +47,7 @@ router.post('/users', (request, response) => {
     createUserController.handle(request, response).catch((Error) => {
       return response.status(400).json({msg: 'Erro no cadastro: ' + Error.message});
     });
-  }
+  };
 });
 
 //HTTP GET USER
@@ -77,7 +79,7 @@ router.get('/logout', authenticated, (request, response) => {
     return response.status(200).json({msg: 'Sessão do usuário encerrada!'})
   } catch (Error){
     return response.status(400).json({msg: 'Erro ao encerrar sessão do usuário!'})
-  }
+  };
 });
 
 //rota privada (teste)
@@ -88,10 +90,20 @@ router.get('/private', (request, response) => {
   response.status(401).json({authenticated: false});
 });
 
+
+//----------ROTAS Boards----------
 // HTTP POST BOARD
 router.post('/users/:id/boards', authenticated, (request, response) => {
   createBoardController.handle(request,response).catch((Error)  => {
     return response.status(400).json({msg: 'Erro na criação do Board: ' + Error.message});
+  });
+});
+
+//----------ROTAS Cards----------
+// HTTP POST CARD
+router.post('/users/:userId/boards/:boardId/cards', authenticated, (request, response) => {
+  createCardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro em criar card: ' + Error.message});
   });
 });
 

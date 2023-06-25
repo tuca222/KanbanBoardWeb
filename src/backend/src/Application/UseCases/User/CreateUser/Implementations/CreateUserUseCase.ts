@@ -1,6 +1,6 @@
-import { User } from "../../../../Core/Entities/User";
-import { IUsersRepository } from "../../../../Core/Repositories/IUsersRepository";
-import { ICryptPasswordService } from "../../../Services/Interfaces/ICryptPasswordService";
+import { User } from "../../../../../Core/Entities/User";
+import { IUsersRepository } from "../../../../../Core/Repositories/IUsersRepository";
+import { ICryptPasswordService } from "../../../../Services/Interfaces/ICryptPasswordService";
 import { ICreateUserRequestDTO } from ".././Interfaces/ICreateUserDTO";
 import { ICreateUserUseCase } from ".././Interfaces/ICreateUserUseCase";
 

@@ -1,4 +1,4 @@
-import { MongoUsersRepository } from "../../../Infra/Repositories/MongoUsersRepository";
+import { MongoUsersRepository } from "../../../../Infra/Repositories/MongoUsersRepository";
 import { ReadUserController } from "./Implementations/ReadUserController";
 import { ReadUserUseCase } from "./Implementations/ReadUserUseCase";
 

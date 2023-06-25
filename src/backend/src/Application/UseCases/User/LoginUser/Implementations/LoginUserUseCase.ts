@@ -1,5 +1,5 @@
-import { IUsersRepository } from "../../../../Core/Repositories/IUsersRepository";
-import { ICryptPasswordService } from "../../../Services/Interfaces/ICryptPasswordService";
+import { IUsersRepository } from "../../../../../Core/Repositories/IUsersRepository";
+import { ICryptPasswordService } from "../../../../Services/Interfaces/ICryptPasswordService";
 import { ILoginUserRequestDTO } from "../Interfaces/ILoginUserRequestDTO";
 import { ILoginUserUseCase } from "../Interfaces/ILoginUserUseCase";
 

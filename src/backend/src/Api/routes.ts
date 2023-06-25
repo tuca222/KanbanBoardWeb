@@ -1,13 +1,13 @@
 import { request } from "express";
-import { createUserController } from "../Application/UseCases/CreateUser";
-import { deleteUserController } from "../Application/UseCases/DeleteUser";
-import { loginUserController } from "../Application/UseCases/LoginUser";
-import { readUserController } from "../Application/UseCases/ReadUser";
-import { updateUserController } from "../Application/UseCases/UpdateUser";
 
 const {Router} = require('express');
 const router = Router();
 import {authenticated}  from "./utils/authenticated";
+import { createUserController } from "../Application/UseCases/User/CreateUser";
+import { deleteUserController } from "../Application/UseCases/User/DeleteUser";
+import { loginUserController } from "../Application/UseCases/User/LoginUser";
+import { readUserController } from "../Application/UseCases/User/ReadUser";
+import { updateUserController } from "../Application/UseCases/User/UpdateUser";
 
 
 //----------ROTAS----------

@@ -1,5 +1,5 @@
-import { IUpdateUserBDComSenhaDTO } from '../../Application/UseCases/UpdateUser/Interfaces/IUpdateUserBDComSenhaDTO';
-import { IUpdateUserBDSemSenhaDTO } from '../../Application/UseCases/UpdateUser/Interfaces/IUpdateUserBDSemSenhaDTO';
+import { IUpdateUserBDComSenhaDTO } from '../../Application/UseCases/User/UpdateUser/Interfaces/IUpdateUserBDComSenhaDTO';
+import { IUpdateUserBDSemSenhaDTO } from '../../Application/UseCases/User/UpdateUser/Interfaces/IUpdateUserBDSemSenhaDTO';
 import { User } from '../Entities/User'
 
 export interface IUsersRepository{

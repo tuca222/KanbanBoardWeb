@@ -12,6 +12,10 @@ export class UpdateUserUseCase implements IUpdateUserUseCase{
   async execute(data: IUpdateUserRequestDTO): Promise<void> {
     try{
       const userBD = await this.usersRepository.findById(data.id)
+      if (!userBD){
+        throw new Error('Usuario nao encontrado');
+      }
+
       if (userBD.email != data.email){
         const emailExiste = await this.usersRepository.findByEmail(data.email)
         if (emailExiste){

@@ -1,15 +1,15 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import IconButton from "@mui/material/IconButton";
+import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import Tooltip from '@mui/material/Tooltip';
 
-export default function DeleteCardButton() {
+export default function AddUserButton() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -22,23 +22,30 @@ export default function DeleteCardButton() {
 
   return (
     <React.Fragment>
-      <Tooltip title="Excluir Tarefa">
-        <IconButton onClick={handleClickOpen} aria-label="Excluir Tarefa">
-          <DeleteOutlineIcon />
+      <Tooltip title="Adicionar Usuário ao Board">
+        <IconButton onClick={handleClickOpen} aria-label="Adicionar Usuário">
+          <PersonAddAlt1Icon color='action' />
         </IconButton>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Confirmar Exclusão</DialogTitle>
+        <DialogTitle sx={{ pb: 0 }}>Adicionar Usuário ao Board</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Esta operação é irreversível! Tem certeza que deseja excluir?
-          </DialogContentText>
+          <TextField
+            margin="normal"
+            variant='standard'
+            fullWidth
+            id="loginEmail"
+            label="Email"
+            name="email"
+            autoComplete="email"
+            autoFocus
+          />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={handleClose}>Excluir</Button>
+          <Button onClick={handleClose}>Confirmar</Button>
         </DialogActions>
       </Dialog>
-    </React.Fragment >
+    </React.Fragment>
   );
 }

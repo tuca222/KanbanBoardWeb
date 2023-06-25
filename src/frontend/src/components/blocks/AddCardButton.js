@@ -5,11 +5,11 @@ import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import EditIcon from "@mui/icons-material/Edit";
 import IconButton from "@mui/material/IconButton";
+import QueueIcon from '@mui/icons-material/Queue';
 import Tooltip from '@mui/material/Tooltip';
 
-export default function EditCardButton() {
+export default function AddCardButton() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -22,13 +22,13 @@ export default function EditCardButton() {
 
   return (
     <React.Fragment>
-      <Tooltip title="Editar Tarefa">
-        <IconButton onClick={handleClickOpen} aria-label="Editar Tarefa" >
-          <EditIcon />
+      <Tooltip title="Adicionar Tarefa">
+        <IconButton onClick={handleClickOpen} aria-label="Adicionar tarefa" >
+          <QueueIcon />
         </IconButton>
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle sx={{ pb: 0 }}>Editar Tarefa</DialogTitle>
+        <DialogTitle sx={{ pb: 0 }}>Adicionar Tarefa</DialogTitle>
         <DialogContent>
           <TextField
             id="tarefaNome"
@@ -73,7 +73,7 @@ export default function EditCardButton() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button type='submit' onClick={handleClose}>Confirmar</Button>
+          <Button onClick={handleClose}>Confirmar</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

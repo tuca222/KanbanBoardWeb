@@ -36,7 +36,7 @@ export default function KanbanCard() {
   return (
     <Card elevation={2} sx={{ mt: 2, borderLeft: 'solid 4px #909090' }}>      
       <CardHeader sx={{ py: 1 }}
-        title={<Typography variant="h6" >tarefaNome</Typography>}
+        title={<Typography variant="h6" sx={{ fontSize: 18 }} >tarefaNome</Typography>}
         action={
           <ExpandMore
             expand={expanded}
@@ -50,8 +50,8 @@ export default function KanbanCard() {
       />
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent sx={{ py: 0 }}>
-          <Typography variant="overline">tarefaDescricao</Typography>
-          <Stack sx={{ pt: 1 }} direction="row" spacing={1}>
+          <Typography color="text.secondary" variant="body2" sx={{ textTransform: 'uppercase' }}>tarefaDescricao</Typography>
+          <Stack sx={{ pt: 2 }} direction="row" spacing={1}>
             <Chip
               size="small"
               icon={<ScheduleIcon />}

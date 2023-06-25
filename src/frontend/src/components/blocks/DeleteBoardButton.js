@@ -9,7 +9,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from '@mui/material/Tooltip';
 
-export default function DeleteCardButton() {
+export default function DeleteBoardButton() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -22,7 +22,7 @@ export default function DeleteCardButton() {
 
   return (
     <React.Fragment>
-      <Tooltip title="Excluir Tarefa">
+      <Tooltip title="Excluir Board">
         <IconButton onClick={handleClickOpen} aria-label="Excluir Tarefa">
           <DeleteOutlineIcon />
         </IconButton>

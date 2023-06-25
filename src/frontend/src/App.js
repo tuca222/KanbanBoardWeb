@@ -1,12 +1,9 @@
 import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import Home from './components/pages/Home';
+import KanbanBoard from './components/pages/KanbanBoard';
 
-//import KanbanBoard from './components/layouts/KanbanBoard';
-// <KanbanBoard />
-
-const lightTheme = createTheme({
+const appTheme = createTheme({
   palette: {
     mode: 'light',
   },
@@ -14,9 +11,9 @@ const lightTheme = createTheme({
 
 const App = () => {
   return (
-    <ThemeProvider theme={lightTheme}>
+    <ThemeProvider theme={appTheme}>
       <CssBaseline />
-      <Home />
+      <KanbanBoard />
     </ThemeProvider>
   );
 };

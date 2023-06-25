@@ -1,6 +1,7 @@
 import React from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+//import KanbanBoard from './components/old/KanbanBoard';
 import KanbanBoard from './components/pages/KanbanBoard';
 
 const appTheme = createTheme({

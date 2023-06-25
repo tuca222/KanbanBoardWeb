@@ -5,11 +5,10 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
-import IconButton from "@mui/material/IconButton";
-import Tooltip from '@mui/material/Tooltip';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
 
-export default function DeleteCardButton() {
+export default function LogoutMenuItem() {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -22,23 +21,21 @@ export default function DeleteCardButton() {
 
   return (
     <React.Fragment>
-      <Tooltip title="Excluir Tarefa">
-        <IconButton onClick={handleClickOpen} aria-label="Excluir Tarefa">
-          <DeleteOutlineIcon />
-        </IconButton>
-      </Tooltip>
+      <ListItemButton sx={{ pl: 9 }} onClick={handleClickOpen}>        
+        <ListItemText primary='Sair' />
+      </ListItemButton>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Confirmar Exclusão</DialogTitle>
+        <DialogTitle>Logout</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Esta operação é irreversível! Tem certeza que deseja excluir?
+            Tem certeza que deseja sair?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={handleClose}>Excluir</Button>
+          <Button onClick={handleClose}>Sair</Button>
         </DialogActions>
       </Dialog>
-    </React.Fragment >
+    </React.Fragment>
   );
 }

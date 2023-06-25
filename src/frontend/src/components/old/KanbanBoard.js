@@ -49,35 +49,35 @@ const KanbanBoard = () => {
       content: '',
       index: columns.column1.cards.length, // Definir o índice com base na quantidade atual de cards
     };
-  
+
     setColumns((prevColumns) => {
       const updatedColumns = { ...prevColumns };
       updatedColumns.column1.cards.push(newCard); // Adicionar o novo card à coluna "column1"
       return updatedColumns;
     });
-  
+
     setNewCardName('');
   };
-  
+
   const [selectedCard, setSelectedCard] = useState(null);
 
   const handleDragEnd = (result) => {
     // Mover cartões nas colunas
     const { source, destination } = result;
-  
+
     if (!destination) return;
-  
+
     const sourceColumnId = source.droppableId;
     const destinationColumnId = destination.droppableId;
     const sourceColumn = columns[sourceColumnId];
     const destinationColumn = columns[destinationColumnId];
-  
+
     if (sourceColumnId === destinationColumnId) {
       // Movendo dentro da mesma coluna
       const sourceCards = Array.from(sourceColumn.cards);
       const [draggedCard] = sourceCards.splice(source.index, 1);
       sourceCards.splice(destination.index, 0, draggedCard);
-  
+
       setColumns((prevColumns) => ({
         ...prevColumns,
         [sourceColumnId]: {
@@ -97,7 +97,7 @@ const KanbanBoard = () => {
         ...draggedCard,
         index: destination.index,
       });
-  
+
       setColumns((prevColumns) => ({
         ...prevColumns,
         [sourceColumnId]: {
@@ -116,7 +116,7 @@ const KanbanBoard = () => {
         },
       }));
     }
-  
+
     setSelectedCard(null);
   };
 
@@ -142,15 +142,15 @@ const KanbanBoard = () => {
             <div className="kanban-column" key={column.id}>
               <h3>{column.title}</h3>
               {column.id === 'column1' && (
-              <div>
-                <input
-                  type="text"
-                  value={newCardName}
-                  onChange={(e) => setNewCardName(e.target.value)}
-                />
-                <button onClick={handleAddCard}>Adicionar Card</button>
-              </div>
-            )}
+                <div>
+                  <input
+                    type="text"
+                    value={newCardName}
+                    onChange={(e) => setNewCardName(e.target.value)}
+                  />
+                  <button onClick={handleAddCard}>Adicionar Card</button>
+                </div>
+              )}
               <Droppable droppableId={column.id}>
                 {(provided) => (
                   <div

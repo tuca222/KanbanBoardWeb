@@ -26,23 +26,39 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function KanbanCard() {
+export default function CardTarefa({ id, name, description, content, author, deadline, taskColor, isSelected, onSelectCard, onCardChange }) {
   const [expanded, setExpanded] = React.useState(false);
 
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
+  const handleClick = () => {
+    onSelectCard(id);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log({
+      name: data.get('tarefaNome'),
+      description: data.get('tarefaDescricao'),      
+      content: data.get('tarefaContent'),      
+      deadline: data.get('tarefaPrazo'),      
+    });
   };
 
   return (
-    <Card elevation={2} sx={{ mt: 2, borderLeft: 'solid 4px #909090' }}>      
+    <Card
+      className={`card ${isSelected ? 'selected' : ''}`}
+      onClick={handleClick}
+      elevation={2}
+      sx={{ mt: 2, borderLeft: `solid 4px ${taskColor}` }}
+    >
       <CardHeader sx={{ py: 1 }}
-        title={<Typography variant="h6" >tarefaNome</Typography>}
+        title={<Typography color='GrayText' variant="h6" sx={{ fontSize: 18 }} >{name}</Typography>}
         action={
           <ExpandMore
             expand={expanded}
-            onClick={handleExpandClick}
+            onClick={() => setExpanded(!expanded)}
             aria-expanded={expanded}
-            aria-label="expandir card"
+            aria-label="Expandir Card"
           >
             <ExpandMoreIcon />
           </ExpandMore>
@@ -50,27 +66,34 @@ export default function KanbanCard() {
       />
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent sx={{ py: 0 }}>
-          <Typography variant="overline">tarefaDescricao</Typography>
-          <Stack sx={{ pt: 1 }} direction="row" spacing={1}>
+          <Typography color="text.secondary" variant="body2" sx={{ textTransform: 'uppercase' }}>{description}</Typography>
+          <Stack sx={{ pt: 2 }} direction="row" spacing={1}>
             <Chip
               size="small"
               icon={<ScheduleIcon />}
-              label="tarefaPrazo"
+              label={deadline}
             />
             <Chip
               size="small"
               icon={<AccountCircleIcon />}
-              label="tarefaCriador"
+              label={author}
             />
           </Stack>
           <Typography variant="body2" color="text" sx={{ pt: 2 }}>
-            tarefaConteudo = Et velit excepturi et nihil quia ea repellat temporibus. Et rerum quibusdam et facere quia id omnis placeat sed dolorem praesentium ut deserunt sint.
+            {content}
           </Typography>
         </CardContent>
         <CardActions sx={{ pt: 1, pb: 2, pr: 2, float: "right" }}>
           <Stack direction="row" spacing={1}>
             <DeleteCardButton />
-            <EditCardButton />
+            <EditCardButton
+              name={name}
+              description={description}
+              content={content}
+              author={author}
+              deadline={deadline}
+              onFormConfirm={handleSubmit}
+            />
           </Stack>
         </CardActions>
       </Collapse>

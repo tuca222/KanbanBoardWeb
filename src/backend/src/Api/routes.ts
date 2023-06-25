@@ -1,4 +1,4 @@
-import { request } from "express";
+import { request, response } from "express";
 
 const {Router} = require('express');
 const router = Router();
@@ -9,6 +9,8 @@ import { loginUserController } from "../Application/UseCases/User/LoginUser";
 import { readUserController } from "../Application/UseCases/User/ReadUser";
 import { updateUserController } from "../Application/UseCases/User/UpdateUser";
 import { createCardController } from "../Application/UseCases/Card/CreateCard";
+import { createBoardController } from "../Application/UseCases/Board/CreateBoard";
+
 
 
 //----------ROTAS----------
@@ -89,13 +91,21 @@ router.get('/private', (request, response) => {
 });
 
 
+//----------ROTAS Boards----------
+// HTTP POST BOARD
+router.post('/users/:id/boards', authenticated, (request, response) => {
+  createBoardController.handle(request,response).catch((Error)  => {
+    return response.status(400).json({msg: 'Erro na criação do Board: ' + Error.message});
+  });
+});
+
 //----------ROTAS Cards----------
+// HTTP POST CARD
 router.post('/users/:userId/boards/:boardId/cards', authenticated, (request, response) => {
   createCardController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro em criar card: ' + Error.message});
   });
 });
-
 
 
 export {router}

@@ -2,13 +2,13 @@ import { IUpdateUserUseCase } from "../Interfaces/IUpdateUserUseCase";
 import { IUpdateUserRequestDTO } from "../Interfaces/IUpdateUserRequestDTO";
 import { IUsersRepository } from "../../../../../Core/Repositories/IUsersRepository";
 import { ICryptPasswordService } from "../../../../Services/Interfaces/ICryptPasswordService";
-import { IBoardServices } from "../../../../Services/Interfaces/IBoardServices";
+import { IBoardService } from "../../../../Services/Interfaces/IBoardService";
 
 export class UpdateUserUseCase implements IUpdateUserUseCase{
   constructor(
     private usersRepository: IUsersRepository,
     private cryptPasswordService: ICryptPasswordService,
-    private boardServices: IBoardServices
+    private boardService: IBoardService
   ) {}
 
   async execute(data: IUpdateUserRequestDTO): Promise<void> {
@@ -31,8 +31,8 @@ export class UpdateUserUseCase implements IUpdateUserUseCase{
         if (userNameExiste){
           throw new Error('Este nome de usuário já existe!');
         };
-        await this.boardServices.updateEditor(userBD, data.userName);
-        await this.boardServices.updateCriadorCard(userBD, data.userName);
+        await this.boardService.updateEditor(userBD, data.userName);
+        await this.boardService.updateCriadorCard(userBD, data.userName);
       };
       if (data.senha){
         data.senha = (await this.cryptPasswordService.cryptPassword(data.senha)).toString();

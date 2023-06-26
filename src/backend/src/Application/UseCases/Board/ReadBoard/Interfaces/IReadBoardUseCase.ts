@@ -1,4 +1,3 @@
-import { Board } from "../../../../../Core/Entities/Board";
 import { IReadBoardResponseDTO } from "./IReadBoardResponseDTO";
 
 export interface IReadBoardUseCase {

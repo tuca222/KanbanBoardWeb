@@ -2,9 +2,9 @@ import { MongoUsersRepository } from "../../../../Infra/Repositories/MongoUsersR
 import { ReadBoardController } from "./Implementations/ReadBoardController";
 import { ReadBoardUseCase } from "./Implementations/ReadBoardUseCase";
 
-const usersRepository = new MongoUsersRepository()
-const readBoarUseCase = new ReadBoardUseCase(usersRepository)
+const usersRepository = new MongoUsersRepository();
+const readBoarUseCase = new ReadBoardUseCase(usersRepository);
 
-const readBoardController = new ReadBoardController(readBoarUseCase)
+const readBoardController = new ReadBoardController(readBoarUseCase);
 
-export { readBoardController }
+export { readBoardController };

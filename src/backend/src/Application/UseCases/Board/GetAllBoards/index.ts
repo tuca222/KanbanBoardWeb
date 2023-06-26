@@ -1,5 +1,5 @@
 import { MongoUsersRepository } from "../../../../Infra/Repositories/MongoUsersRepository";
-import { GetAllBoardsController } from "./Implementations/GetAllBoardsControllet";
+import { GetAllBoardsController } from "./Implementations/GetAllBoardsController";
 import { GetAllBoardsUseCase } from "./Implementations/GetAllBoardsUseCase";
 
 const usersRepository = new MongoUsersRepository();

@@ -5,11 +5,11 @@ import { IGetAllBoardsUseCase } from "../Interfaces/IGetAllBoardsUseCase";
 
 export class GetAllBoardsUseCase implements IGetAllBoardsUseCase{
   constructor(
-    private userRepository: IUsersRepository
+    private usersRepository: IUsersRepository
   ){}
   async execute(userId: string): Promise<IGetAllBoardsResponseDTO> {
     try{
-      const userBD = await this.userRepository.findById(userId);
+      const userBD = await this.usersRepository.findById(userId);
       if(!userBD){
         throw new Error('Usuário não encontrado no banco de dados!');
       };

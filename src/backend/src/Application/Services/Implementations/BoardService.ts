@@ -9,7 +9,7 @@ export class BoardService implements IBoardService{
     private usersRepository: IUsersRepository
   ){}
   
-  async createBoard(user: User) {
+  async createBoard(user: User): Promise<Board> {
     try {
       const boardProps = {
         id: uuidv4(),
@@ -59,8 +59,28 @@ export class BoardService implements IBoardService{
     throw new Error("Method not implemented.");
   };
 
-  async shareBoard() {
-    throw new Error("Method not implemented.");
+  async shareBoard(userDonoBoard: User, emailUser: string, boardId: string): Promise<void> {
+    try{
+      const emailUserExiste = await this.usersRepository.findByEmail(emailUser);
+      if (!emailUserExiste){
+        throw new Error('Email de usuário não encontrado no banco de dados!');
+      };
+
+      const jaPossuiAcessoBoard = emailUserExiste.boards.filter(b => b.id === boardId)[0];
+      if (jaPossuiAcessoBoard) {
+        throw new Error('Usuário já possui acesso a esse Board!');
+      };
+
+      const boardCompartilhado = userDonoBoard.boards.filter(b => b.id === boardId)[0];
+      boardCompartilhado.compartilhado = true;
+      emailUserExiste.boards.push(boardCompartilhado);
+
+      await this.usersRepository.saveUserUpdates(emailUserExiste);
+      await this.usersRepository.saveUserUpdates(userDonoBoard);
+      
+    } catch (Error){
+      throw Error
+    }
   };
 
   async updateEditor(userBD: User, newUserName: string): Promise<void> {

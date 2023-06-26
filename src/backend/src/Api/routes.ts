@@ -13,6 +13,7 @@ import { createBoardController } from "../Application/UseCases/Board/CreateBoard
 import { readBoardController } from "../Application/UseCases/Board/ReadBoard";
 import { createCardController } from "../Application/UseCases/Card/CreateCard";
 import { readCardController } from "../Application/UseCases/Card/ReadCard";
+import { shareBoardController } from "../Application/UseCases/Board/ShareBoard";
 
 
 
@@ -117,6 +118,13 @@ router.post('/users/:id/boards', authenticated, (request, response) => {
 });
 
 // HTTP UPDATE BOARD
+
+// HTTP SHARE BOARD ---- COMPARTILHAR
+router.post('/users/:userId/boards/:boardId/share', authenticated, (request, response) => {
+  shareBoardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro ao compartilhar Board: ' + Error.message})
+  })
+})
 
 // HTTP DELETE BOARD
 

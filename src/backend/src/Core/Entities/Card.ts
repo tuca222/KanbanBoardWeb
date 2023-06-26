@@ -1,6 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 
-enum Status{
+export enum Status{
   ToDo = 1, 
   InProgress,
   Testing, 

@@ -15,7 +15,7 @@ export class BoardService implements IBoardService{
         id: uuidv4(),
         titulo: "Novo Board",
         compartilhado: false,
-        editores: [user.userName],
+        dono: user.userName,
         cards: [{
           id: uuidv4(),
           nomeTarefa: "Nova Tarefa ToDo",
@@ -70,12 +70,9 @@ export class BoardService implements IBoardService{
   async updateEditor(userBD: User, newUserName: string): Promise<void> {
     try{
       for (var i = 0; i <= (userBD.boards.length - 1); i++){
-        for (var j = 0; j <= (userBD.boards[i].editores.length - 1); j++){
-          if (userBD.boards[i].editores[j] === userBD.userName){
-            userBD.boards[i].editores[j] = newUserName;
-            await this.usersRepository.saveUserUpdates(userBD);
-            break
-          };
+        if (userBD.boards[i].dono === userBD.userName){
+          userBD.boards[i].dono = newUserName;
+          await this.usersRepository.saveUserUpdates(userBD);
         };
       };
     } catch(Error) {

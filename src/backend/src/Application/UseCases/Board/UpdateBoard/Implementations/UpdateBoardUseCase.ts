@@ -24,7 +24,7 @@ export class UpdateBoardUseCase implements IUpdateBoardUseCase{
         throw new Error('Usuário não pode editar este Board!')
       }
 
-      await this.boardServide.updateTituloBoard(board.id, data.boardTitulo);
+      await this.boardServide.updateTituloBoard(data.boardId, data.boardTitulo);
       
       return data.boardTitulo;
     } catch (Error) {

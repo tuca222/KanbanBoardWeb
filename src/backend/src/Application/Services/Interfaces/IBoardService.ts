@@ -6,5 +6,5 @@ export interface IBoardService{
   updateTituloBoard(boardId: string, boardTitulo: string): Promise<void>;
   shareBoard(userDonoBoard: User, emailUser: string, boardId: string): Promise<void>;
   updateDono(userBD: User, newUserName: string): Promise<void>;
-  deleteBoard();
+  deleteBoard(boardId: string): Promise<void>;
 }

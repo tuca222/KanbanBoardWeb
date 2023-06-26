@@ -55,8 +55,19 @@ export class BoardService implements IBoardService{
     };
   };
   
-  async updateTituloBoard() {
-    throw new Error("Method not implemented.");
+  async updateTituloBoard(boardId: string, boardTitulo: string): Promise<void> {
+    try{
+      const users = await this.usersRepository.findAllUsers();
+      for (var i = 0; i <= (users.length - 1); i++){
+        const boardUserBd = users[i].boards.filter(b => b.id === boardId)[0];
+        if (boardUserBd){
+          boardUserBd.titulo = boardTitulo;
+          await this.usersRepository.saveUserUpdates(users[i]);
+        };
+      };
+    } catch (Error){
+      throw Error
+    };
   };
 
   async shareBoard(userDonoBoard: User, emailUser: string, boardId: string): Promise<void> {
@@ -80,7 +91,7 @@ export class BoardService implements IBoardService{
       
     } catch (Error){
       throw Error
-    }
+    };
   };
 
   async updateDono(userBD: User, newUserName: string): Promise<void> {

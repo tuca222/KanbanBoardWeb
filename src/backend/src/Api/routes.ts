@@ -15,6 +15,7 @@ import { shareBoardController } from "../Application/UseCases/Board/ShareBoard";
 import { createCardController } from "../Application/UseCases/Card/CreateCard";
 import { readCardController } from "../Application/UseCases/Card/ReadCard";
 import { updateCardController } from "../Application/UseCases/Card/UpdateCard";
+import { updateBoardController } from "../Application/UseCases/Board/UpdateBoard";
 
 
 
@@ -120,11 +121,11 @@ router.post('/users/:id/boards', authenticated, (request, response) => {
 });
 
 // HTTP UPDATE BOARD
-// router.patch('/users/:userId/boards/:boardId', authenticated, (request, response) => {
-// updateBoardController.handle(request, response).catch((Error) => {
-//  return response.status(400).json({msg: 'Erro ao atualizar Board: ' + Error.message});
-//});
-//});
+router.patch('/users/:userId/boards/:boardId', authenticated, (request, response) => {
+  updateBoardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro ao atualizar Board: ' + Error.message});
+  });
+});
 
 // HTTP SHARE BOARD ---- COMPARTILHAR
 router.post('/users/:userId/boards/:boardId/share', authenticated, (request, response) => {

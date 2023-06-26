@@ -3,10 +3,9 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/pages/Home';
-import SignupForm from './components/pages/SignupForm';
-import LoginForm from './components/pages/LoginForm';
+import SignupPage from './components/pages/SignupPage';
 import NotFoundPage from './components/pages/NotFoundPage';
-//import KanbanBoard from './components/pages/KanbanBoard';
+import KanbanBoard from './components/pages/KanbanBoard';
 
 const appTheme = createTheme({
   palette: {
@@ -17,13 +16,13 @@ const appTheme = createTheme({
 const App = () => {
   return (
     <ThemeProvider theme={appTheme}>
-      <CssBaseline />
-        <Routes>
-          <Route path="/" element= {<Home />} />
-          <Route path="/SignupForm" element= {<SignupForm />} />
-          <Route path="/LoginForm" element= {<LoginForm />} />
-          <Route path="*" element= {<NotFoundPage />} />
-        </Routes>
+      <CssBaseline />      
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route path="/SignupForm" element={<SignupPage />} />
+        <Route path="/Boards" element={<KanbanBoard />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
     </ThemeProvider>
   );
 };

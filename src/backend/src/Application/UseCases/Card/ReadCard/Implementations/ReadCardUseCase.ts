@@ -11,7 +11,7 @@ export class ReadCardUseCase implements IReadCardUseCase{
     try {
       const userBD = await this.usersRepository.findById(data.userId);
       if (!userBD) {
-        throw new Error('Usuario nao encontrado');
+        throw new Error('Usuário não foi encontrado, id incorreto!');
       };
 
       const board = userBD.boards.filter(b => b.id === data.boardId)[0];

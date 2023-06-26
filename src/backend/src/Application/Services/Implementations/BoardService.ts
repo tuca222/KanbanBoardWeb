@@ -9,7 +9,7 @@ export class BoardService implements IBoardService{
     private usersRepository: IUsersRepository
   ){}
   
-  async createBoard(user: User) {
+  async createBoard(user: User): Promise<Board> {
     try {
       const boardProps = {
         id: uuidv4(),
@@ -59,35 +59,44 @@ export class BoardService implements IBoardService{
     throw new Error("Method not implemented.");
   };
 
-  async shareBoard() {
-    throw new Error("Method not implemented.");
-  };
-
-  async updateEditor(userBD: User, newUserName: string): Promise<void> {
+  async shareBoard(userDonoBoard: User, emailUser: string, boardId: string): Promise<void> {
     try{
-      for (var i = 0; i <= (userBD.boards.length - 1); i++){
-        if (userBD.boards[i].dono === userBD.userName){
-          userBD.boards[i].dono = newUserName;
-          await this.usersRepository.saveUserUpdates(userBD);
-        };
+      const emailUserExiste = await this.usersRepository.findByEmail(emailUser);
+      if (!emailUserExiste){
+        throw new Error('Email de usuário não encontrado no banco de dados!');
       };
-    } catch(Error) {
-      throw new Error("Erro ao atualizar o userName do Editor!");
-    };
+
+      const jaPossuiAcessoBoard = emailUserExiste.boards.filter(b => b.id === boardId)[0];
+      if (jaPossuiAcessoBoard) {
+        throw new Error('Usuário já possui acesso a esse Board!');
+      };
+
+      const boardCompartilhado = userDonoBoard.boards.filter(b => b.id === boardId)[0];
+      boardCompartilhado.compartilhado = true;
+      emailUserExiste.boards.push(boardCompartilhado);
+
+      await this.usersRepository.saveUserUpdates(emailUserExiste);
+      await this.usersRepository.saveUserUpdates(userDonoBoard);
+      
+    } catch (Error){
+      throw Error
+    }
   };
 
-  async updateCriadorCard(userBD: User, newUserName: string): Promise<void> {
+  async updateDono(userBD: User, newUserName: string): Promise<void> {
     try{
-      for (var i = 0; i <= (userBD.boards.length - 1); i++){
-        for (var j = 0; j <= (userBD.boards[i].cards.length - 1); j++){
-          if (userBD.boards[i].cards[j].userNameCriador === userBD.userName){
-            userBD.boards[i].cards[j].userNameCriador = newUserName;
-            await this.usersRepository.saveUserUpdates(userBD);
+      const users = await this.usersRepository.findAllUsers();
+
+      for (var i = 0; i <= (users.length - 1); i++) {
+        for(var j = 0; j <= (users[i].boards.length -1); j++){
+          if (users[i].boards[j].dono === userBD.userName){
+            users[i].boards[j].dono = newUserName;
+            await this.usersRepository.saveUserUpdates(users[i])
           };
         };
       };
     } catch(Error) {
-      throw new Error("Erro ao atualizar o userName do Criador do Card!");
+      throw new Error("Erro ao atualizar o userName do Criador!");
     };
   };
 

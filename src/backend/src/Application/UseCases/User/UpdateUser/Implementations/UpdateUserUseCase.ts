@@ -3,12 +3,14 @@ import { IUpdateUserRequestDTO } from "../Interfaces/IUpdateUserRequestDTO";
 import { IUsersRepository } from "../../../../../Core/Repositories/IUsersRepository";
 import { ICryptPasswordService } from "../../../../Services/Interfaces/ICryptPasswordService";
 import { IBoardService } from "../../../../Services/Interfaces/IBoardService";
+import { ICardService } from "../../../../Services/Interfaces/ICardService";
 
 export class UpdateUserUseCase implements IUpdateUserUseCase{
   constructor(
     private usersRepository: IUsersRepository,
     private cryptPasswordService: ICryptPasswordService,
-    private boardService: IBoardService
+    private boardService: IBoardService,
+    private cardService: ICardService
   ) {}
 
   async execute(data: IUpdateUserRequestDTO): Promise<void> {
@@ -31,9 +33,12 @@ export class UpdateUserUseCase implements IUpdateUserUseCase{
         if (userNameExiste){
           throw new Error('Este nome de usuário já existe!');
         };
-        await this.boardService.updateEditor(userBD, data.userName);
-        await this.boardService.updateCriadorCard(userBD, data.userName);
+        
+        await this.boardService.updateDono(userBD, data.userName);
+        const newUserBd = await this.usersRepository.findById(data.id);
+        await this.cardService.updateCriadorCard(newUserBd, data.userName);
       };
+
       if (data.senha){
         data.senha = (await this.cryptPasswordService.cryptPassword(data.senha)).toString();
         await this.usersRepository.updateUserBDComSenha(data)

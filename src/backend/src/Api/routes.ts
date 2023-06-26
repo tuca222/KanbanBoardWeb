@@ -120,15 +120,28 @@ router.post('/users/:id/boards', authenticated, (request, response) => {
 });
 
 // HTTP UPDATE BOARD
+// router.patch('/users/:userId/boards/:boardId', authenticated, (request, response) => {
+// updateBoardController.handle(request, response).catch((Error) => {
+//  return response.status(400).json({msg: 'Erro ao atualizar Board: ' + Error.message});
+//});
+//});
 
 // HTTP SHARE BOARD ---- COMPARTILHAR
 router.post('/users/:userId/boards/:boardId/share', authenticated, (request, response) => {
   shareBoardController.handle(request, response).catch((Error) => {
-    return response.status(400).json({msg: 'Erro ao compartilhar Board: ' + Error.message})
-  })
-})
+    return response.status(400).json({msg: 'Erro ao compartilhar Board: ' + Error.message});
+  });
+});
+
+// HTTP EDITORES BOARD -- Quem possui acesso ao Board
 
 // HTTP DELETE BOARD
+// router.delete('/users/:userId/boards/:boardId', authenticated, (request, response) => {
+// deleteBoardController.handle(request, response).catch((Error) => {
+//  return response.status(400).json({msg: 'Erro ao deletar Board: ' + Error.message});
+//});
+//});
+
 
 //----------ROTAS Cards----------
 // HTTP POST CARD

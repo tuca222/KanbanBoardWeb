@@ -6,6 +6,5 @@ export interface IBoardService{
   updateTituloBoard();
   shareBoard(userDonoBoard: User, emailUser: string, boardId: string): Promise<void>;
   updateEditor(userBD: User, newUserName: string): Promise<void>;
-  updateCriadorCard(userBD: User, newUserName: string): Promise<void>;
   deleteBoard();
 }

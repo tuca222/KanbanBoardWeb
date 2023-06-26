@@ -61,4 +61,19 @@ export class CardService implements ICardService {
     };
   };
 
+  async updateCriadorCard(userBD: User, newUserName: string): Promise<void> {
+    try{
+      for (var i = 0; i <= (userBD.boards.length - 1); i++){
+        for (var j = 0; j <= (userBD.boards[i].cards.length - 1); j++){
+          if (userBD.boards[i].cards[j].userNameCriador === userBD.userName){
+            userBD.boards[i].cards[j].userNameCriador = newUserName;
+            await this.usersRepository.saveUserUpdates(userBD);
+          };
+        };
+      };
+    } catch(Error) {
+      throw new Error("Erro ao atualizar o userName do Criador do Card!");
+    };
+  };
+
 };

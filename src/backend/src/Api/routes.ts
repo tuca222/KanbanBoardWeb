@@ -13,11 +13,14 @@ import { createBoardController } from "../Application/UseCases/Board/CreateBoard
 import { readBoardController } from "../Application/UseCases/Board/ReadBoard";
 import { updateBoardController } from "../Application/UseCases/Board/UpdateBoard";
 import { shareBoardController } from "../Application/UseCases/Board/ShareBoard";
+import { getEditoresBoardController } from "../Application/UseCases/Board/GetEditoresBoard";
+import { deleteBoardController } from "../Application/UseCases/Board/DeleteBoard";
 import { createCardController } from "../Application/UseCases/Card/CreateCard";
 import { readCardController } from "../Application/UseCases/Card/ReadCard";
 import { updateCardController } from "../Application/UseCases/Card/UpdateCard";
 import { deleteCardController } from "../Application/UseCases/Card/DeleteCard";
-import { deleteBoardController } from "../Application/UseCases/Board/DeleteBoard";
+
+
 
 
 
@@ -132,6 +135,13 @@ router.patch('/users/:userId/boards/:boardId', authenticated, (request, response
 router.post('/users/:userId/boards/:boardId/share', authenticated, (request, response) => {
   shareBoardController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro ao compartilhar Board: ' + Error.message});
+  });
+});
+
+// HTTP EDITORES BOARD -- Quem possui acesso ao Board
+router.get('/users/:userId/boards/:boardId/editores', authenticated, (request, response) => {
+  getEditoresBoardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro ao verificar os usuários com acesso ao Board: ' + Error.message});
   });
 });
 

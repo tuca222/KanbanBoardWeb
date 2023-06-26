@@ -111,6 +111,27 @@ export class BoardService implements IBoardService{
     };
   };
 
+  async getEditores(boardId: string): Promise<string[]> {
+    try {
+      let editores = new Array<string>();
+      const users = await this.usersRepository.findAllUsers();
+      for (var i = 0; i <= (users.length - 1); i ++) {
+        const board = users[i].boards.filter(b => b.id === boardId)[0];
+        if (board) {
+          if(board.dono == users[i].userName) {
+            editores.unshift(users[i].userName);
+          }
+          else{
+            editores.push(users[i].userName);
+          };
+        };
+      };
+      return editores;
+    } catch (Error) {
+      throw new Error('Erro em buscar editores do board');
+    };
+  };
+
   async deleteBoard(boardId: string): Promise<void> {
     try {
       const users = await this.usersRepository.findAllUsers();

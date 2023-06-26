@@ -11,6 +11,7 @@ export class CreateCardController {
     try{
       const userId = request.params.userId;
       const boardId = request.params.boardId;
+      
       if (!ObjectId.isValid(userId)){
         return response.status(400).json({msg: 'Parametro de rota incorreto!'})
       }

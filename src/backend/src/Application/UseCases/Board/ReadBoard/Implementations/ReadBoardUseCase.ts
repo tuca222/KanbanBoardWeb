@@ -1,12 +1,12 @@
-import { Board } from "../../../../../Core/Entities/Board";
 import { IUsersRepository } from "../../../../../Core/Repositories/IUsersRepository";
+import { IReadBoardResponseDTO } from "../Interfaces/IReadBoardResponseDTO";
 import { IReadBoardUseCase } from "../Interfaces/IReadBoardUseCase";
 
 export class ReadBoardUseCase implements IReadBoardUseCase{
   constructor(
     private usersRepository: IUsersRepository
   ){}
-  async execute(userId: string, boardId: string): Promise<Board> {
+  async execute(userId: string, boardId: string): Promise<IReadBoardResponseDTO> {
     try{
       const userBD = await this.usersRepository.findById(userId)
       if (!userBD){
@@ -14,8 +14,18 @@ export class ReadBoardUseCase implements IReadBoardUseCase{
       };
 
       const board = userBD.boards.filter(b => b.id === boardId)[0];
+      
+      if (!board){
+        throw new Error('Board com este ID não encontrado na lista de boards do usuário!');
+      };
 
-      return board;
+      const dono = (board.dono === userBD.userName);
+      
+      
+      return {
+        board: board,
+        dono: dono
+      };
     } catch(Error){
       throw Error;
     };

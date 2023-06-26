@@ -8,9 +8,11 @@ import { deleteUserController } from "../Application/UseCases/User/DeleteUser";
 import { loginUserController } from "../Application/UseCases/User/LoginUser";
 import { readUserController } from "../Application/UseCases/User/ReadUser";
 import { updateUserController } from "../Application/UseCases/User/UpdateUser";
+import { readCardController } from "../Application/UseCases/Card/ReadCard";
+import { readBoardController } from "../Application/UseCases/Board/ReadBoard";
 import { createBoardController } from "../Application/UseCases/Board/CreateBoard";
 import { createCardController } from "../Application/UseCases/Card/CreateCard";
-import { readCardController } from "../Application/UseCases/Card/ReadCard";
+
 
 
 //----------ROTAS----------
@@ -98,6 +100,13 @@ router.post('/users/:id/boards', authenticated, (request, response) => {
     return response.status(400).json({msg: 'Erro na criação do Board: ' + Error.message});
   });
 });
+
+// HTTP GET BOARD -- READ BOARD
+router.get('/users/:userId/boards/:boardId', authenticated, (request, response) => {
+  readBoardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro na leitura do Board: ' + Error.message})
+  })
+})
 
 //----------ROTAS Cards----------
 // HTTP POST CARD

@@ -54,10 +54,6 @@ export class BoardService implements IBoardService{
       throw new Error("Erro ao criar Board!");
     };
   };
-
-  async findBoardById(boardId: string) {
-    throw new Error("Method not implemented.");
-  };
   
   async updateTituloBoard() {
     throw new Error("Method not implemented.");

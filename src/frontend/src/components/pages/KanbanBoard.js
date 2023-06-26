@@ -66,7 +66,7 @@ export default function KanbanBoard() {
           name: 'Tarefa 04',
           description: 'Breve descrição da tarefa',
           content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.',
-          index: 0,
+          index: 3,
           author: 'Fulano da Silva',
           deadline: '07/10/1978',
           taskColor: '#ff9800'
@@ -76,7 +76,7 @@ export default function KanbanBoard() {
           name: 'Tarefa 05',
           description: 'Breve descrição da tarefa',
           content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.',
-          index: 1,
+          index: 4,
           author: 'Fulano da Silva',
           deadline: '07/10/1978',
           taskColor: '#ff9800'
@@ -93,7 +93,7 @@ export default function KanbanBoard() {
           name: 'Tarefa 06',
           description: 'Breve descrição da tarefa',
           content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.',
-          index: 0,
+          index: 5,
           author: 'Fulano da Silva',
           deadline: '07/10/1978',
           taskColor: '#03a9f4'
@@ -147,64 +147,70 @@ export default function KanbanBoard() {
   const [selectedCard, setSelectedCard] = React.useState(null);
 
   const handleDragEnd = (result) => {
-    // Mover cartões nas colunas
-    const { source, destination } = result;
+  // Mover cartões nas colunas
+  const { source, destination } = result;
 
-    if (!destination) return;
+  if (!destination) return;
 
-    const sourceColumnId = source.droppableId;
-    const destinationColumnId = destination.droppableId;
-    const sourceColumn = columns[sourceColumnId];
-    const destinationColumn = columns[destinationColumnId];
+  const sourceColumnId = source.droppableId;
+  const destinationColumnId = destination.droppableId;
+  const sourceColumn = columns[sourceColumnId];
+  const destinationColumn = columns[destinationColumnId];
 
-    if (sourceColumnId === destinationColumnId) {
-      // Movendo dentro da mesma coluna
-      const sourceCards = Array.from(sourceColumn.cards);
-      const [draggedCard] = sourceCards.splice(source.index, 1);
-      sourceCards.splice(destination.index, 0, draggedCard);
+  if (sourceColumnId === destinationColumnId) {
+    // Movendo dentro da mesma coluna
+    const sourceCards = Array.from(sourceColumn.cards);
+    const [draggedCard] = sourceCards.splice(source.index, 1);
+    sourceCards.splice(destination.index, 0, draggedCard);
 
-      setColumns((prevColumns) => ({
-        ...prevColumns,
-        [sourceColumnId]: {
-          ...prevColumns[sourceColumnId],
-          cards: sourceCards.map((card, index) => ({
-            ...card,
-            index,
-          })),
-        },
-      }));
-    } else {
-      // Movendo para uma coluna diferente
-      const sourceCards = Array.from(sourceColumn.cards);
-      const destinationCards = Array.from(destinationColumn.cards);
-      const [draggedCard] = sourceCards.splice(source.index, 1);
-      destinationCards.splice(destination.index, 0, {
-        ...draggedCard,
-        index: destination.index,
-      });
+    setColumns((prevColumns) => ({
+      ...prevColumns,
+      [sourceColumnId]: {
+        ...prevColumns[sourceColumnId],
+        cards: sourceCards.map((card, index) => ({
+          ...card,
+          index,
+        })),
+      },
+    }));
+  } else {
+    // Movendo para uma coluna diferente
+    const sourceCards = Array.from(sourceColumn.cards);
+    const destinationCards = Array.from(destinationColumn.cards);
+    const [draggedCard] = sourceCards.splice(source.index, 1);
 
-      setColumns((prevColumns) => ({
-        ...prevColumns,
-        [sourceColumnId]: {
-          ...prevColumns[sourceColumnId],
-          cards: sourceCards.map((card, index) => ({
-            ...card,
-            index,
-          })),
-        },
-        [destinationColumnId]: {
-          ...prevColumns[destinationColumnId],
-          cards: destinationCards.map((card, index) => ({
-            ...card,
-            index,
-          })),
-        },
-      }));
-    }
+    // Manter as informações do cartão ao mover para outra coluna
+    const updatedCard = {
+      ...draggedCard,
+      index: destination.index,
+      taskColor: destinationColumn.color,
+    };
 
-    setSelectedCard(null);
-  };
+    destinationCards.splice(destination.index, 0, updatedCard);
 
+    setColumns((prevColumns) => ({
+      ...prevColumns,
+      [sourceColumnId]: {
+        ...prevColumns[sourceColumnId],
+        cards: sourceCards.map((card, index) => ({
+          ...card,
+          index,
+        })),
+      },
+      [destinationColumnId]: {
+        ...prevColumns[destinationColumnId],
+        cards: destinationCards.map((card, index) => ({
+          ...card,
+          index,
+        })),
+      },
+    }));
+  }
+
+  setSelectedCard(null);
+};
+
+  
   const handleCardChange = (cardId, field, value) => {
     setColumns((prevColumns) => {
       const updatedColumns = { ...prevColumns };

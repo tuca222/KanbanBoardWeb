@@ -11,9 +11,9 @@ import Stack from "@mui/material/Stack";
 import Chip from "@mui/material/Chip";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import EditCardButton from "./EditCardButton";
+import DeleteCardButton from "./DeleteCardButton";
 import ScheduleIcon from "@mui/icons-material/Schedule";
-import EditCardButton from './EditCardButton'
-import DeleteCardButton from './DeleteCardButton'
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -26,33 +26,58 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-export default function CardTarefa({ id, name, description, content, author, deadline, taskColor, isSelected, onSelectCard, onCardChange }) {
+export default function CardTarefa({
+  id,
+  name,
+  description,
+  content,
+  index,
+  author,
+  deadline,
+  taskColor,
+  isSelected,
+  onSelectCard,
+  onCardChange,
+}) {
   const [expanded, setExpanded] = React.useState(false);
+  const [taskName, setTaskName] = React.useState(name);
+  const [taskDescription, setTaskDescription] = React.useState(description);
+  const [taskContent, setTaskContent] = React.useState(content);
+  const [taskDeadline, setTaskDeadline] = React.useState(deadline);
+
+  React.useEffect(() => {
+    setTaskName(name);
+    setTaskDescription(description);
+    setTaskContent(content);
+    setTaskDeadline(deadline);
+  }, [name, description, content, deadline]);
 
   const handleClick = () => {
     onSelectCard(id);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      name: data.get('tarefaNome'),
-      description: data.get('tarefaDescricao'),      
-      content: data.get('tarefaContent'),      
-      deadline: data.get('tarefaPrazo'),      
-    });
+  const handleSaveChanges = (name, description, content, deadline) => {
+    setTaskName(name);
+    setTaskDescription(description);
+    setTaskContent(content);
+    setTaskDeadline(deadline);
+    onCardChange(id, { name, description, content, deadline });
   };
 
   return (
     <Card
-      className={`card ${isSelected ? 'selected' : ''}`}
+      className={`card ${isSelected ? "selected" : ""}`}
       onClick={handleClick}
       elevation={2}
       sx={{ mt: 2, borderLeft: `solid 4px ${taskColor}` }}
     >
-      <CardHeader sx={{ py: 1 }}
-        title={<Typography color='GrayText' variant="h6" sx={{ fontSize: 18 }} >{name}</Typography>}
+      <CardHeader
+        sx={{ py: 1 }}
+        title={
+          <Typography color="GrayText" variant="h6" sx={{ fontSize: 18 }}>
+            {taskName}
+          </Typography>
+        }
         action={
           <ExpandMore
             expand={expanded}
@@ -66,13 +91,15 @@ export default function CardTarefa({ id, name, description, content, author, dea
       />
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent sx={{ py: 0 }}>
-          <Typography color="text.secondary" variant="body2" sx={{ textTransform: 'uppercase' }}>{description}</Typography>
+          <Typography
+            color="text.secondary"
+            variant="body2"
+            sx={{ textTransform: "uppercase" }}
+          >
+            {taskDescription}
+          </Typography>
           <Stack sx={{ pt: 2 }} direction="row" spacing={1}>
-            <Chip
-              size="small"
-              icon={<ScheduleIcon />}
-              label={deadline}
-            />
+            <Chip size="small" icon={<ScheduleIcon />} label={taskDeadline} />
             <Chip
               size="small"
               icon={<AccountCircleIcon />}
@@ -80,19 +107,18 @@ export default function CardTarefa({ id, name, description, content, author, dea
             />
           </Stack>
           <Typography variant="body2" color="text" sx={{ pt: 2 }}>
-            {content}
+            {taskContent}
           </Typography>
         </CardContent>
         <CardActions sx={{ pt: 1, pb: 2, pr: 2, float: "right" }}>
           <Stack direction="row" spacing={1}>
             <DeleteCardButton />
             <EditCardButton
-              name={name}
-              description={description}
-              content={content}
-              author={author}
-              deadline={deadline}
-              onFormConfirm={handleSubmit}
+              onSaveChanges={handleSaveChanges}
+              initialName={taskName}
+              initialDescription={taskDescription}
+              initialContent={taskContent}
+              initialDeadline={taskDeadline}
             />
           </Stack>
         </CardActions>

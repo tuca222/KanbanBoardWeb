@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import axios from 'axios';
@@ -6,8 +6,6 @@ import * as Yup from 'yup';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Paper from '@mui/material/Paper';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
@@ -16,12 +14,16 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import { grey } from '@mui/material/colors';
 
 
-const LoginForm = () => {
+const SignupForm = () => {
 
   // Schema dos dados do formulário
   const validationSchema = Yup.object().shape({
+    userName: Yup.string().required('O nome de usuário é obrigatório'),
     email: Yup.string().email('Email inválido').required('O email é obrigatório'),
     senha: Yup.string().required('A senha é obrigatória'),
+    senhaConfirmada: Yup.string()
+      .oneOf([Yup.ref('senha'), null], 'As senhas não coincidem')
+      .required('A confirmação de senha é obrigatória'),
   });
 
   const servidor = 'http://localhost:3333' // Define a porta do servidor
@@ -32,7 +34,7 @@ const LoginForm = () => {
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       // Enviar request ao servidor
-      const response = await axios.post(`${servidor}/login/`, values);
+      const response = await axios.post(`${servidor}/users/`, values);
       console.log(response.data);
 
       // Redirecionar para a rota certa (userId)
@@ -58,19 +60,33 @@ const LoginForm = () => {
           <DashboardIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Entre no App KanbanBoard
+          Criar conta no App KanbanBoard
         </Typography>
         <Formik
           initialValues={{
+            user: '',
             email: '',
             senha: '',
-            remember: false,
+            confirmarSenha: '',
           }}
           validationSchema={validationSchema}
           onSubmit={handleSubmit}
         >
           {({ errors, touched }) => (
             <Form>
+              <Field
+                as={TextField}
+                margin="normal"
+                required
+                fullWidth
+                id="loginUser"
+                label="Nome de Usuário"
+                name="userName"
+                autoComplete="user"
+                error={touched.user && !!errors.user}
+                helperText={touched.user && errors.user}
+              />
+
               <Field
                 as={TextField}
                 margin="normal"
@@ -87,10 +103,9 @@ const LoginForm = () => {
               <Field
                 as={TextField}
                 margin="normal"
-                required
                 fullWidth
                 id="loginSenha"
-                label="Senha"
+                label="Senha *"
                 type="password"
                 name="senha"
                 autoComplete="senha"
@@ -99,10 +114,16 @@ const LoginForm = () => {
               />
 
               <Field
-                as={FormControlLabel}
-                control={<Checkbox color="primary" />}
-                label="Salvar sessão"
-                name="remember"
+                as={TextField}
+                margin="normal"
+                fullWidth
+                id="loginConfirmarSenha"
+                label="Repita a senha *"
+                type="password"
+                name="senhaConfirmada"
+                autoComplete="confirmar-senha"
+                error={touched.confirmarSenha && !!errors.confirmarSenha}
+                helperText={touched.confirmarSenha && errors.confirmarSenha}
               />
 
               <Button
@@ -111,12 +132,12 @@ const LoginForm = () => {
                 fullWidth
                 sx={{ mt: 3, mb: 2 }}
               >
-                Entrar
+                Cadastrar-se
               </Button>
 
               <Grid container>
                 <Grid item>
-                  <Link to="/SignupForm">Novo usuário? Cadastre-se</Link>
+                  <Link to="/">Voltar para tela principal</Link>
                 </Grid>
               </Grid>
             </Form>
@@ -127,4 +148,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;

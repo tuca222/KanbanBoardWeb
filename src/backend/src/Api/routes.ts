@@ -11,9 +11,11 @@ import { updateUserController } from "../Application/UseCases/User/UpdateUser";
 import { getAllBoardsController } from "../Application/UseCases/Board/GetAllBoards";
 import { createBoardController } from "../Application/UseCases/Board/CreateBoard";
 import { readBoardController } from "../Application/UseCases/Board/ReadBoard";
+import { shareBoardController } from "../Application/UseCases/Board/ShareBoard";
 import { createCardController } from "../Application/UseCases/Card/CreateCard";
 import { readCardController } from "../Application/UseCases/Card/ReadCard";
-import { shareBoardController } from "../Application/UseCases/Board/ShareBoard";
+import { updateCardController } from "../Application/UseCases/Card/UpdateCard";
+
 
 
 
@@ -141,6 +143,12 @@ router.get('/users/:userId/boards/:boardId/cards/:cardId', authenticated, (reque
     return response.status(400).json({msg: 'Erro em ler card: ' + Error.message});
   });
 });
+
+router.patch('/users/:userId/boards/:boardId/cards/:cardId', authenticated, (request, response) => {
+  updateCardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro em alterar card: ' + Error.message});
+  });
+})
 
 
 export {router}

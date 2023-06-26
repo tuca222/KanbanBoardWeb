@@ -1,6 +1,6 @@
 import { Card } from "../../../../../Core/Entities/Card";
 import { IUsersRepository } from "../../../../../Core/Repositories/IUsersRepository";
-import { ICardService } from "../../../../Services/Interfaces/ICardServices";
+import { ICardService } from "../../../../Services/Interfaces/ICardService";
 import { ICreateCardUseCase } from "../Interfaces/ICreateCardUseCase";
 
 export class CreateCardUseCase implements ICreateCardUseCase {

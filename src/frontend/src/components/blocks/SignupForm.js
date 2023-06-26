@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
+import axios from 'axios';
 import * as Yup from 'yup';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -10,25 +12,37 @@ import Grid from '@mui/material/Grid';
 import Typography from '@mui/material/Typography';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { grey } from '@mui/material/colors';
-import { Link } from 'react-router-dom';
 
-const iconColor = grey[800];
 
 const SignupForm = () => {
+
+  // Schema dos dados do formulário
   const validationSchema = Yup.object().shape({
-    user: Yup.string().required('O nome de usuário é obrigatório'),
+    userName: Yup.string().required('O nome de usuário é obrigatório'),
     email: Yup.string().email('Email inválido').required('O email é obrigatório'),
     senha: Yup.string().required('A senha é obrigatória'),
-    confirmarSenha: Yup.string()
+    senhaConfirmada: Yup.string()
       .oneOf([Yup.ref('senha'), null], 'As senhas não coincidem')
       .required('A confirmação de senha é obrigatória'),
   });
 
-  const handleSubmit = (values, { setSubmitting }) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-      setSubmitting(false);
-    }, 400);
+  const servidor = 'http://localhost:3333' // Define a porta do servidor
+  const navigate = useNavigate(); // Navegação usando react
+  const iconColor = grey[800]; // Cor do ícone
+
+  // Função de callback quando o usuário clica em 'entrar'
+  const handleSubmit = async (values, { setSubmitting }) => {
+    try {
+      // Enviar request ao servidor
+      const response = await axios.post(`${servidor}/users/`, values);
+      console.log(response.data);
+
+      // Redirecionar para a rota certa (userId)
+      navigate(`/users/${response.data.userId}/boards/`);
+    } catch (error) {
+      console.error(error);
+    }
+    setSubmitting(false);
   };
 
   return (
@@ -46,7 +60,7 @@ const SignupForm = () => {
           <DashboardIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Criar conta em Projeto KanbanBoard
+          Criar conta no App KanbanBoard
         </Typography>
         <Formik
           initialValues={{
@@ -67,7 +81,7 @@ const SignupForm = () => {
                 fullWidth
                 id="loginUser"
                 label="Nome de Usuário"
-                name="user"
+                name="userName"
                 autoComplete="user"
                 error={touched.user && !!errors.user}
                 helperText={touched.user && errors.user}
@@ -106,13 +120,18 @@ const SignupForm = () => {
                 id="loginConfirmarSenha"
                 label="Repita a senha *"
                 type="password"
-                name="confirmarSenha"
+                name="senhaConfirmada"
                 autoComplete="confirmar-senha"
                 error={touched.confirmarSenha && !!errors.confirmarSenha}
                 helperText={touched.confirmarSenha && errors.confirmarSenha}
               />
 
-              <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                sx={{ mt: 3, mb: 2 }}
+              >
                 Cadastrar-se
               </Button>
 

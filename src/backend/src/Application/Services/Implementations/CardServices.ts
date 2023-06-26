@@ -36,7 +36,7 @@ export class CardService implements ICardService {
     };
   };
 
-  async updateCard(board: Board, card: Card, updateCardDTO: IUpdateCardBdDTO): Promise<Card> {
+async updateCard(board: Board, card: Card, updateCardDTO: IUpdateCardBdDTO): Promise<Card> {
     try {
       const users = await this.usersRepository.findAllUsers();
       for (var i = 0; i <= (users.length - 1); i++) {

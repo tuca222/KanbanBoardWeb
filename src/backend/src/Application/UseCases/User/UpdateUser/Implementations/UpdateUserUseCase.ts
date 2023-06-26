@@ -33,9 +33,11 @@ export class UpdateUserUseCase implements IUpdateUserUseCase{
         if (userNameExiste){
           throw new Error('Este nome de usuário já existe!');
         };
-        await this.boardService.updateEditor(userBD, data.userName);
+        
+        await this.boardService.updateDono(userBD, data.userName);
         await this.cardService.updateCriadorCard(userBD, data.userName);
       };
+
       if (data.senha){
         data.senha = (await this.cryptPasswordService.cryptPassword(data.senha)).toString();
         await this.usersRepository.updateUserBDComSenha(data)

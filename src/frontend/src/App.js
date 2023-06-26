@@ -6,8 +6,7 @@ import Home from './components/pages/Home';
 import SignupForm from './components/pages/SignupForm';
 import LoginForm from './components/pages/LoginForm';
 import NotFoundPage from './components/pages/NotFoundPage';
-//import KanbanBoard from './components/layouts/KanbanBoard';
-import KanbanBoard from './components/pages/KanbanBoard';
+//import KanbanBoard from './components/pages/KanbanBoard';
 
 const appTheme = createTheme({
   palette: {

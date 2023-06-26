@@ -7,4 +7,5 @@ export interface ICardService {
   createCard(user: User, boardId: string): Promise<Card>;
   updateCard(board: Board, card: Card, updateCardDto: IUpdateCardBdDTO): Promise<Card>;
   updateCriadorCard(userBD: User, newUserName: string): Promise<void>;
+  deleteCard(boardId: string, cardId: string): Promise<void>;
 }

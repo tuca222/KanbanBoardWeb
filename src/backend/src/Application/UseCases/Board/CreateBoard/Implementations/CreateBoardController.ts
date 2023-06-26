@@ -5,7 +5,7 @@ const ObjectId = require ('mongoose').Types.ObjectId;
 export class CreateBoardController{
   constructor(
     private createBoardUseCase: ICreatBoardUseCase
-  ){}
+  ){};
   async handle(request, response): Promise<Response>{
     try {
       const userId = request.params.id;

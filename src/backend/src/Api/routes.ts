@@ -15,6 +15,7 @@ import { shareBoardController } from "../Application/UseCases/Board/ShareBoard";
 import { createCardController } from "../Application/UseCases/Card/CreateCard";
 import { readCardController } from "../Application/UseCases/Card/ReadCard";
 import { updateCardController } from "../Application/UseCases/Card/UpdateCard";
+import { deleteCardController } from "../Application/UseCases/Card/DeleteCard";
 
 
 
@@ -168,5 +169,10 @@ router.patch('/users/:userId/boards/:boardId/cards/:cardId', authenticated, (req
   });
 })
 
+router.delete('/users/:userId/boards/:boardId/cards/:cardId', authenticated, (request, response) => {
+  deleteCardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro em excluir card: ' + Error.message});
+  });
+});
 
 export {router}

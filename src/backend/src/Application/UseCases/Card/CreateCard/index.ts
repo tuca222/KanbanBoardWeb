@@ -1,11 +1,11 @@
 import { MongoUsersRepository } from "../../../../Infra/Repositories/MongoUsersRepository";
-import { CardServices } from "../../../Services/Implementations/CardServices";
+import { CardService } from "../../../Services/Implementations/CardServices";
 import { CreateCardController } from "./Implementations/CreateCardController";
 import { CreateCardUseCase } from "./Implementations/CreateCardUseCase";
 
 
 const mongoUsersRepository = new MongoUsersRepository();
-const cardServices = new CardServices(mongoUsersRepository);
+const cardServices = new CardService(mongoUsersRepository);
 
 const createCardUseCase = new CreateCardUseCase(
   mongoUsersRepository,

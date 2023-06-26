@@ -5,7 +5,18 @@ const Users = require('./Schemas/Users');
 import { IUsersRepository } from "../../Core/Repositories/IUsersRepository";
 
 export class MongoUsersRepository implements IUsersRepository{
+
+  
   private userSchema = Users;
+
+  async findAllUsers(): Promise<Array<User>> {
+    try{
+      const users = await this.userSchema.find();
+      return users;
+    } catch (Error) {
+      throw new Error('Erro ao buscar todos usuarios no banco!')
+    };
+  };
 
   async findById(id: string): Promise<User> {
     try{

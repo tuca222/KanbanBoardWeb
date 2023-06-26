@@ -8,7 +8,6 @@ const mongoUsersRepository = new MongoUsersRepository();
 const readCardUseCase = new ReadCardUseCase(
   mongoUsersRepository
 );
-
 const readCardController= new ReadCardController(readCardUseCase);
 
 export {readCardController};

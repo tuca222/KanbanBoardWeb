@@ -17,6 +17,7 @@ import { createCardController } from "../Application/UseCases/Card/CreateCard";
 import { readCardController } from "../Application/UseCases/Card/ReadCard";
 import { updateCardController } from "../Application/UseCases/Card/UpdateCard";
 import { deleteCardController } from "../Application/UseCases/Card/DeleteCard";
+import { getEditoresBoardController } from "../Application/UseCases/Board/GetEditoresBoard";
 
 
 
@@ -135,11 +136,11 @@ router.post('/users/:userId/boards/:boardId/share', authenticated, (request, res
 });
 
 // HTTP EDITORES BOARD -- Quem possui acesso ao Board
-// router.get('/users/:userId/boards/:boardId/editores', authenticaded, (request, response) => {
-// editoresBoardController.handle(request, response).catch((Error) => {
-//  return response.status(400).json({msg: 'Erro ao verificar os usuários com acesso ao Board: ' + Error.message});
-//});
-//});
+router.get('/users/:userId/boards/:boardId/editores', authenticated, (request, response) => {
+  getEditoresBoardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro ao verificar os usuários com acesso ao Board: ' + Error.message});
+});
+});
 
 // HTTP DELETE BOARD
 // router.delete('/users/:userId/boards/:boardId', authenticated, (request, response) => {

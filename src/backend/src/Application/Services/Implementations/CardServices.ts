@@ -40,9 +40,9 @@ async updateCard(board: Board, card: Card, updateCardDTO: IUpdateCardBdDTO): Pro
     try {
       const users = await this.usersRepository.findAllUsers();
       for (var i = 0; i <= (users.length - 1); i++) {
-        let boardUserBd = users[i].boards.filter(b => b.id === board.id)[0];
+        const boardUserBd = users[i].boards.filter(b => b.id === board.id)[0];
         if (boardUserBd) {
-          let cardUserBd = boardUserBd.cards.filter(c => c.id == card.id)[0];
+          const cardUserBd = boardUserBd.cards.filter(c => c.id == card.id)[0];
           if (cardUserBd) {
             cardUserBd.nomeTarefa = updateCardDTO.nomeTarefa;
             cardUserBd.descricao = updateCardDTO.descricao;

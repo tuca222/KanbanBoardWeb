@@ -1,11 +1,22 @@
-import { IUpdateUserBDComSenhaDTO } from "../../Application/UseCases/UpdateUser/Interfaces/IUpdateUserBDComSenhaDTO";
-import { IUpdateUserBDSemSenhaDTO } from "../../Application/UseCases/UpdateUser/Interfaces/IUpdateUserBDSemSenhaDTO";
+import { IUpdateUserBDComSenhaDTO } from "../../Application/UseCases/User/UpdateUser/Interfaces/IUpdateUserBDComSenhaDTO";
+import { IUpdateUserBDSemSenhaDTO } from "../../Application/UseCases/User/UpdateUser/Interfaces/IUpdateUserBDSemSenhaDTO";
 import { User } from "../../Core/Entities/User";
 const Users = require('./Schemas/Users');
 import { IUsersRepository } from "../../Core/Repositories/IUsersRepository";
 
 export class MongoUsersRepository implements IUsersRepository{
+
+  
   private userSchema = Users;
+
+  async findAllUsers(): Promise<Array<User>> {
+    try{
+      const users = await this.userSchema.find();
+      return users;
+    } catch (Error) {
+      throw new Error('Erro ao buscar todos usuarios no banco!')
+    };
+  };
 
   async findById(id: string): Promise<User> {
     try{
@@ -33,6 +44,14 @@ export class MongoUsersRepository implements IUsersRepository{
       throw new Error('Erro de consulta por nome email no banco de dados');
     };
   };
+
+  async saveUserUpdates(user: User) {
+    try{
+      await this.userSchema.findByIdAndUpdate(user._id, user)
+    } catch(Error){
+      throw new Error("Erro ao atualizar usuario no Banco!");
+    };
+  }
 
   async save(user: User): Promise<void> {
     try{

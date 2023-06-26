@@ -1,13 +1,22 @@
-import { request } from "express";
-import { createUserController } from "../Application/UseCases/CreateUser";
-import { deleteUserController } from "../Application/UseCases/DeleteUser";
-import { loginUserController } from "../Application/UseCases/LoginUser";
-import { readUserController } from "../Application/UseCases/ReadUser";
-import { updateUserController } from "../Application/UseCases/UpdateUser";
+import { request, response } from "express";
 
 const {Router} = require('express');
 const router = Router();
 import {authenticated}  from "./utils/authenticated";
+import { createUserController } from "../Application/UseCases/User/CreateUser";
+import { deleteUserController } from "../Application/UseCases/User/DeleteUser";
+import { loginUserController } from "../Application/UseCases/User/LoginUser";
+import { readUserController } from "../Application/UseCases/User/ReadUser";
+import { updateUserController } from "../Application/UseCases/User/UpdateUser";
+import { getAllBoardsController } from "../Application/UseCases/Board/GetAllBoards";
+import { createBoardController } from "../Application/UseCases/Board/CreateBoard";
+import { readBoardController } from "../Application/UseCases/Board/ReadBoard";
+import { shareBoardController } from "../Application/UseCases/Board/ShareBoard";
+import { createCardController } from "../Application/UseCases/Card/CreateCard";
+import { readCardController } from "../Application/UseCases/Card/ReadCard";
+import { updateCardController } from "../Application/UseCases/Card/UpdateCard";
+
+
 
 
 //----------ROTAS----------
@@ -44,7 +53,7 @@ router.post('/users', (request, response) => {
     createUserController.handle(request, response).catch((Error) => {
       return response.status(400).json({msg: 'Erro no cadastro: ' + Error.message});
     });
-  }
+  };
 });
 
 //HTTP GET USER
@@ -76,7 +85,7 @@ router.get('/logout', authenticated, (request, response) => {
     return response.status(200).json({msg: 'Sessão do usuário encerrada!'})
   } catch (Error){
     return response.status(400).json({msg: 'Erro ao encerrar sessão do usuário!'})
-  }
+  };
 });
 
 //rota privada (teste)
@@ -86,5 +95,78 @@ router.get('/private', (request, response) => {
   };
   response.status(401).json({authenticated: false});
 });
+
+
+//----------ROTAS Boards----------
+// HTTP GET ALL BOARDS 
+router.get('/users/:id/boards',authenticated, (request, response) => {
+  getAllBoardsController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro na leitura dos Boards ' + Error.message})
+  })
+})
+
+// HTTP GET BOARD -- READ BOARD
+router.get('/users/:userId/boards/:boardId', authenticated, (request, response) => {
+  readBoardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro na leitura do Board: ' + Error.message})
+  })
+})
+
+// HTTP POST BOARD
+router.post('/users/:id/boards', authenticated, (request, response) => {
+  createBoardController.handle(request,response).catch((Error)  => {
+    return response.status(400).json({msg: 'Erro na criação do Board: ' + Error.message});
+  });
+});
+
+// HTTP UPDATE BOARD
+// router.patch('/users/:userId/boards/:boardId', authenticated, (request, response) => {
+// updateBoardController.handle(request, response).catch((Error) => {
+//  return response.status(400).json({msg: 'Erro ao atualizar Board: ' + Error.message});
+//});
+//});
+
+// HTTP SHARE BOARD ---- COMPARTILHAR
+router.post('/users/:userId/boards/:boardId/share', authenticated, (request, response) => {
+  shareBoardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro ao compartilhar Board: ' + Error.message});
+  });
+});
+
+// HTTP EDITORES BOARD -- Quem possui acesso ao Board
+// router.get('/users/:userId/boards/:boardId/editores', authenticaded, (request, response) => {
+// editoresBoardController.handle(request, response).catch((Error) => {
+//  return response.status(400).json({msg: 'Erro ao verificar os usuários com acesso ao Board: ' + Error.message});
+//});
+//});
+
+// HTTP DELETE BOARD
+// router.delete('/users/:userId/boards/:boardId', authenticated, (request, response) => {
+// deleteBoardController.handle(request, response).catch((Error) => {
+//  return response.status(400).json({msg: 'Erro ao deletar Board: ' + Error.message});
+//});
+//});
+
+
+//----------ROTAS Cards----------
+// HTTP POST CARD
+router.post('/users/:userId/boards/:boardId/cards', authenticated, (request, response) => {
+  createCardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro em criar card: ' + Error.message});
+  });
+});
+
+router.get('/users/:userId/boards/:boardId/cards/:cardId', authenticated, (request, response) => {
+  readCardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro em ler card: ' + Error.message});
+  });
+});
+
+router.patch('/users/:userId/boards/:boardId/cards/:cardId', authenticated, (request, response) => {
+  updateCardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro em alterar card: ' + Error.message});
+  });
+})
+
 
 export {router}

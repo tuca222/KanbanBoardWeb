@@ -6,7 +6,7 @@ export class Board{
   public readonly id: string;
   public titulo: string;
   public compartilhado: boolean;
-  public editores: Array<string>;
+  public dono: string;
   public cards: Array<Card>;
 
   constructor(props: Omit<Board, 'id'>, id?: string) {

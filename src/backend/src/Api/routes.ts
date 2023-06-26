@@ -8,9 +8,10 @@ import { deleteUserController } from "../Application/UseCases/User/DeleteUser";
 import { loginUserController } from "../Application/UseCases/User/LoginUser";
 import { readUserController } from "../Application/UseCases/User/ReadUser";
 import { updateUserController } from "../Application/UseCases/User/UpdateUser";
-import { createCardController } from "../Application/UseCases/Card/CreateCard";
-import { createBoardController } from "../Application/UseCases/Board/CreateBoard";
+import { readCardController } from "../Application/UseCases/Card/ReadCard";
 import { readBoardController } from "../Application/UseCases/Board/ReadBoard";
+import { createBoardController } from "../Application/UseCases/Board/CreateBoard";
+import { createCardController } from "../Application/UseCases/Card/CreateCard";
 
 
 
@@ -112,6 +113,12 @@ router.get('/users/:userId/boards/:boardId', authenticated, (request, response) 
 router.post('/users/:userId/boards/:boardId/cards', authenticated, (request, response) => {
   createCardController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro em criar card: ' + Error.message});
+  });
+});
+
+router.get('/users/:userId/boards/:boardId/cards/:cardId', authenticated, (request, response) => {
+  readCardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro em ler card: ' + Error.message});
   });
 });
 

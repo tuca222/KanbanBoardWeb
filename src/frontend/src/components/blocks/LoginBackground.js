@@ -2,7 +2,7 @@ import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 
-export default function HomeBackground() {
+export default function LoginBackground() {
   return (
     <React.Fragment>
       <CssBaseline />

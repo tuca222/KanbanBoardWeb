@@ -7,10 +7,6 @@ import SignupForm from './components/pages/SignupForm';
 import LoginForm from './components/pages/LoginForm';
 import NotFoundPage from './components/pages/NotFoundPage';
 //import KanbanBoard from './components/layouts/KanbanBoard';
-
-
-const lightTheme = createTheme({
-//import KanbanBoard from './components/old/KanbanBoard';
 import KanbanBoard from './components/pages/KanbanBoard';
 
 const appTheme = createTheme({

@@ -55,8 +55,19 @@ export class BoardService implements IBoardService{
     };
   };
   
-  async updateTituloBoard() {
-    throw new Error("Method not implemented.");
+  async updateTituloBoard(boardId: string, boardTitulo: string): Promise<void> {
+    try{
+      const users = await this.usersRepository.findAllUsers();
+      for (var i = 0; i <= (users.length - 1); i++){
+        const boardUserBd = users[i].boards.filter(b => b.id === boardId)[0];
+        if (boardUserBd){
+          boardUserBd.titulo = boardTitulo;
+          await this.usersRepository.saveUserUpdates(users[i]);
+        };
+      };
+    } catch (Error){
+      throw Error
+    };
   };
 
   async shareBoard(userDonoBoard: User, emailUser: string, boardId: string): Promise<void> {
@@ -80,7 +91,7 @@ export class BoardService implements IBoardService{
       
     } catch (Error){
       throw Error
-    }
+    };
   };
 
   async updateDono(userBD: User, newUserName: string): Promise<void> {
@@ -100,7 +111,40 @@ export class BoardService implements IBoardService{
     };
   };
 
-  async deleteBoard() {
-    throw new Error("Method not implemented.");
+  async getEditores(boardId: string): Promise<string[]> {
+    try {
+      let editores = new Array<string>();
+      const users = await this.usersRepository.findAllUsers();
+      for (var i = 0; i <= (users.length - 1); i ++) {
+        const board = users[i].boards.filter(b => b.id === boardId)[0];
+        if (board) {
+          if(board.dono == users[i].userName) {
+            editores.unshift(users[i].userName);
+          }
+          else{
+            editores.push(users[i].userName);
+          };
+        };
+      };
+      return editores;
+    } catch (Error) {
+      throw new Error('Erro em buscar editores do board');
+    };
+  };
+
+  async deleteBoard(boardId: string): Promise<void> {
+    try {
+      const users = await this.usersRepository.findAllUsers();
+      for (var i = 0; i <= (users.length - 1); i++){
+        const board = users[i].boards.filter(b => b.id === boardId)[0];
+        if (board){
+          const indexBoard = users[i].boards.indexOf(board);
+          users[i].boards.splice(indexBoard, 1);
+          await this.usersRepository.saveUserUpdates(users[i]);
+        };
+      };
+    } catch (Error) {
+      throw new Error('Erro ao excluir Board!');
+    };
   };
 }

@@ -11,10 +11,15 @@ import { updateUserController } from "../Application/UseCases/User/UpdateUser";
 import { getAllBoardsController } from "../Application/UseCases/Board/GetAllBoards";
 import { createBoardController } from "../Application/UseCases/Board/CreateBoard";
 import { readBoardController } from "../Application/UseCases/Board/ReadBoard";
+import { updateBoardController } from "../Application/UseCases/Board/UpdateBoard";
 import { shareBoardController } from "../Application/UseCases/Board/ShareBoard";
+import { getEditoresBoardController } from "../Application/UseCases/Board/GetEditoresBoard";
+import { deleteBoardController } from "../Application/UseCases/Board/DeleteBoard";
 import { createCardController } from "../Application/UseCases/Card/CreateCard";
 import { readCardController } from "../Application/UseCases/Card/ReadCard";
 import { updateCardController } from "../Application/UseCases/Card/UpdateCard";
+import { deleteCardController } from "../Application/UseCases/Card/DeleteCard";
+
 
 
 
@@ -120,11 +125,11 @@ router.post('/users/:id/boards', authenticated, (request, response) => {
 });
 
 // HTTP UPDATE BOARD
-// router.patch('/users/:userId/boards/:boardId', authenticated, (request, response) => {
-// updateBoardController.handle(request, response).catch((Error) => {
-//  return response.status(400).json({msg: 'Erro ao atualizar Board: ' + Error.message});
-//});
-//});
+router.patch('/users/:userId/boards/:boardId', authenticated, (request, response) => {
+  updateBoardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro ao atualizar Board: ' + Error.message});
+  });
+});
 
 // HTTP SHARE BOARD ---- COMPARTILHAR
 router.post('/users/:userId/boards/:boardId/share', authenticated, (request, response) => {
@@ -134,18 +139,18 @@ router.post('/users/:userId/boards/:boardId/share', authenticated, (request, res
 });
 
 // HTTP EDITORES BOARD -- Quem possui acesso ao Board
-// router.get('/users/:userId/boards/:boardId/editores', authenticaded, (request, response) => {
-// editoresBoardController.handle(request, response).catch((Error) => {
-//  return response.status(400).json({msg: 'Erro ao verificar os usuários com acesso ao Board: ' + Error.message});
-//});
-//});
+router.get('/users/:userId/boards/:boardId/editores', authenticated, (request, response) => {
+  getEditoresBoardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro ao verificar os usuários com acesso ao Board: ' + Error.message});
+  });
+});
 
 // HTTP DELETE BOARD
-// router.delete('/users/:userId/boards/:boardId', authenticated, (request, response) => {
-// deleteBoardController.handle(request, response).catch((Error) => {
-//  return response.status(400).json({msg: 'Erro ao deletar Board: ' + Error.message});
-//});
-//});
+router.delete('/users/:userId/boards/:boardId', authenticated, (request, response) => {
+  deleteBoardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro ao deletar Board: ' + Error.message});
+  });
+});
 
 
 //----------ROTAS Cards----------
@@ -168,5 +173,10 @@ router.patch('/users/:userId/boards/:boardId/cards/:cardId', authenticated, (req
   });
 })
 
+router.delete('/users/:userId/boards/:boardId/cards/:cardId', authenticated, (request, response) => {
+  deleteCardController.handle(request, response).catch((Error) => {
+    return response.status(400).json({msg: 'Erro em excluir card: ' + Error.message});
+  });
+});
 
 export {router}

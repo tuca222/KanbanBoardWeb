@@ -10,7 +10,7 @@ export class CardService implements ICardService {
   constructor(
     private usersRepository: IUsersRepository
   ) {}
-
+  
   async createCard(user: User, boardId: string): Promise<Card> {
     try {
       const board = user.boards.filter(b => b.id === boardId)[0];
@@ -40,9 +40,9 @@ async updateCard(board: Board, card: Card, updateCardDTO: IUpdateCardBdDTO): Pro
     try {
       const users = await this.usersRepository.findAllUsers();
       for (var i = 0; i <= (users.length - 1); i++) {
-        let boardUserBd = users[i].boards.filter(b => b.id === board.id)[0];
+        const boardUserBd = users[i].boards.filter(b => b.id === board.id)[0];
         if (boardUserBd) {
-          let cardUserBd = boardUserBd.cards.filter(c => c.id == card.id)[0];
+          const cardUserBd = boardUserBd.cards.filter(c => c.id == card.id)[0];
           if (cardUserBd) {
             cardUserBd.nomeTarefa = updateCardDTO.nomeTarefa;
             cardUserBd.descricao = updateCardDTO.descricao;
@@ -76,6 +76,23 @@ async updateCard(board: Board, card: Card, updateCardDTO: IUpdateCardBdDTO): Pro
       };
     } catch(Error) {
       throw new Error("Erro ao atualizar o userName do Criador do Card!");
+    };
+  };
+
+  async deleteCard(boardId: string, cardId: string): Promise<void> {
+    try{
+      const users = await this.usersRepository.findAllUsers();
+      for (var i = 0; i <= (users.length - 1); i ++) {
+        const board = users[i].boards.filter(b => b.id == boardId)[0];
+        if (board) {
+          const card = board.cards.filter(c => c.id == cardId)[0];
+          const index = board.cards.indexOf(card);
+          board.cards.splice(index, 1);
+          await this.usersRepository.saveUserUpdates(users[i]);
+        };
+      };
+    } catch (Error) {
+      throw new Error('Erro ao exlcuir card')
     };
   };
 

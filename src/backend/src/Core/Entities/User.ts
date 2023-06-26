@@ -15,7 +15,7 @@ export class User{
       id: uuidv4(),
       titulo: "Board Exemplo",
       compartilhado: false,
-      editores: [this.userName],
+      dono: this.userName,
       cards: [{
         id: uuidv4(),
         nomeTarefa: "Tarefa exemplo ToDo",

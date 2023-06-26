@@ -10,15 +10,14 @@ export class DeleteUserController {
     try{
       const id = request.params.id;
       if (id.length != 24){
-        throw new Error('ID inválido')
-      }
+        return response.status(400).json({msg:'Parâmetro de rota incorreto!'})
+      };
       await this.deleteUserUseCase.execute(id);
     
       request.session.destroy();
       return response.status(200).json({msg: 'Usuário excluido com sucesso! Sessão encerrada!'});
     } catch(Error) {
       throw Error;
-    }
-    return;
-  }
+    };
+  };
 }

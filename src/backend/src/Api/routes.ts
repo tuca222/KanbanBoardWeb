@@ -8,10 +8,10 @@ import { deleteUserController } from "../Application/UseCases/User/DeleteUser";
 import { loginUserController } from "../Application/UseCases/User/LoginUser";
 import { readUserController } from "../Application/UseCases/User/ReadUser";
 import { updateUserController } from "../Application/UseCases/User/UpdateUser";
-import { readCardController } from "../Application/UseCases/Card/ReadCard";
-import { readBoardController } from "../Application/UseCases/Board/ReadBoard";
 import { createBoardController } from "../Application/UseCases/Board/CreateBoard";
+import { readBoardController } from "../Application/UseCases/Board/ReadBoard";
 import { createCardController } from "../Application/UseCases/Card/CreateCard";
+import { readCardController } from "../Application/UseCases/Card/ReadCard";
 
 
 

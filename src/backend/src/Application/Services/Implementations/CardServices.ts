@@ -63,11 +63,14 @@ async updateCard(board: Board, card: Card, updateCardDTO: IUpdateCardBdDTO): Pro
 
   async updateCriadorCard(userBD: User, newUserName: string): Promise<void> {
     try{
-      for (var i = 0; i <= (userBD.boards.length - 1); i++){
-        for (var j = 0; j <= (userBD.boards[i].cards.length - 1); j++){
-          if (userBD.boards[i].cards[j].userNameCriador === userBD.userName){
-            userBD.boards[i].cards[j].userNameCriador = newUserName;
-            await this.usersRepository.saveUserUpdates(userBD);
+      const users = await this.usersRepository.findAllUsers();
+      for (var i = 0; i <= (users.length - 1); i++){
+        for (var j = 0; j <= (users[i].boards.length - 1); j++) {
+          for (var z = 0; z <= (users[i].boards[j].cards.length - 1); z++) {
+            if (users[i].boards[j].cards[z].userNameCriador === userBD.userName) {
+              users[i].boards[j].cards[z].userNameCriador = newUserName;
+              await this.usersRepository.saveUserUpdates(users[i]);
+            };
           };
         };
       };

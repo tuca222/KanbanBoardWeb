@@ -35,7 +35,8 @@ export class UpdateUserUseCase implements IUpdateUserUseCase{
         };
         
         await this.boardService.updateDono(userBD, data.userName);
-        await this.cardService.updateCriadorCard(userBD, data.userName);
+        const newUserBd = await this.usersRepository.findById(data.id);
+        await this.cardService.updateCriadorCard(newUserBd, data.userName);
       };
 
       if (data.senha){

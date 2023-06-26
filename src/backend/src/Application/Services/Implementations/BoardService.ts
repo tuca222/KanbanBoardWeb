@@ -86,28 +86,15 @@ export class BoardService implements IBoardService{
   async updateDono(userBD: User, newUserName: string): Promise<void> {
     try{
       const users = await this.usersRepository.findAllUsers();
-      console.log(userBD.userName)
-      console.log(newUserName)
 
-      for (var i = 0; i <= (users.length - 1); i++){
-        console.log("primeiro for", users[i].userName)
+      for (var i = 0; i <= (users.length - 1); i++) {
         for(var j = 0; j <= (users[i].boards.length -1); j++){
-          console.log("segundo for", users[i].userName)
           if (users[i].boards[j].dono === userBD.userName){
-            console.log('entrou no if')
             users[i].boards[j].dono = newUserName;
-            console.log(users[i].boards[j].dono)
-            console.log(users[i])
             await this.usersRepository.saveUserUpdates(users[i])
           };
         };
       };
-      // for (var j = 0; j <= (userBD.boards.length - 1); j++){
-      //   if (userBD.boards[j].dono === userBD.userName){
-      //     userBD.boards[j].dono = newUserName;
-      //     await this.usersRepository.saveUserUpdates(userBD);
-      //   };
-      // };
     } catch(Error) {
       throw new Error("Erro ao atualizar o userName do Criador!");
     };

@@ -9,7 +9,12 @@
 [0619/184442.615:ERROR:(-1)] Check failed: false. 
 [0619/185036.855:ERROR:(-1)] Check failed: false. 
 [0619/202629.509:ERROR:(-1)] Check failed: false. 
+<<<<<<< HEAD
 [0624/165146.862:ERROR:(-1)] Check failed: false. 
 [0624/170645.814:ERROR:(-1)] Check failed: false. 
 [0624/184336.814:ERROR:(-1)] Check failed: false. 
 [0624/184711.054:ERROR:(-1)] Check failed: false. 
+=======
+[0625/174231.749:ERROR:(-1)] Check failed: false. 
+[0626/000400.474:ERROR:(-1)] Check failed: false. 
+>>>>>>> feature/front/tratarDados

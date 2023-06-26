@@ -10,6 +10,10 @@ import NotFoundPage from './components/pages/NotFoundPage';
 
 
 const lightTheme = createTheme({
+//import KanbanBoard from './components/old/KanbanBoard';
+import KanbanBoard from './components/pages/KanbanBoard';
+
+const appTheme = createTheme({
   palette: {
     mode: 'light',
   },
@@ -17,7 +21,7 @@ const lightTheme = createTheme({
 
 const App = () => {
   return (
-    <ThemeProvider theme={lightTheme}>
+    <ThemeProvider theme={appTheme}>
       <CssBaseline />
         <Routes>
           <Route path="/" element= {<Home />} />

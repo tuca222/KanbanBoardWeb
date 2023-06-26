@@ -33,9 +33,8 @@ export class UpdateCardUseCase implements IUpdateCardUseCase {
         dataPrazo: data.dataPrazo,
         status: data.status
       };
-      console.log('UseCase')
       const newCard = await this.cardService.updateCard(board, card, updateCardInfos);
-      
+
       return newCard;
     } catch (Error) {
       throw Error;

@@ -26,7 +26,6 @@ export class UpdateCardController {
         dataPrazo, 
         status
       };
-      console.log('controller')
       const updatedCard = await this.updateCardUseCase.execute(requestDTO);
 
       return response.status(200).json({card: updatedCard});

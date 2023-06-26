@@ -7,5 +7,5 @@ export interface IBoardService{
   shareBoard(userDonoBoard: User, emailUser: string, boardId: string): Promise<void>;
   getEditores(boardId: string): Promise<Array<string>>;
   updateDono(userBD: User, newUserName: string): Promise<void>;
-  deleteBoard();
+  deleteBoard(boardId: string): Promise<void>;
 }

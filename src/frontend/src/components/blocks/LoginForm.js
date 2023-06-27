@@ -16,7 +16,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import { grey } from '@mui/material/colors';
 
 
-const LoginForm = () => {
+export default function LoginForm() {
 
   // Schema dos dados do formulário
   const validationSchema = Yup.object().shape({
@@ -126,5 +126,3 @@ const LoginForm = () => {
     </Grid>
   );
 };
-
-export default LoginForm;

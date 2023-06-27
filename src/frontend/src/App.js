@@ -5,7 +5,7 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './components/pages/Home';
 import SignupPage from './components/pages/SignupPage';
 import NotFoundPage from './components/pages/NotFoundPage';
-import KanbanBoard from './components/pages/KanbanBoard';
+import UserDashboard from './components/pages/UserDashboard';
 
 const appTheme = createTheme({
   palette: {
@@ -18,10 +18,10 @@ const App = () => {
     <ThemeProvider theme={appTheme}>
       <CssBaseline />
       <Routes>
-        <Route exact path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/users/:userId/boards/" element={<UserDashboard />} />
         <Route path="/SignupForm" element={<SignupPage />} />
-        <Route path="/users/:userId/boards/" element={<KanbanBoard />} />
-        <Route path="*" element={<NotFoundPage />} />
+        <Route path="/*" element={<NotFoundPage />} />
       </Routes>
     </ThemeProvider>
   );

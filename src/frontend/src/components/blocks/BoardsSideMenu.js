@@ -1,4 +1,5 @@
 import * as React from 'react';
+import axios from 'axios';
 import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
@@ -10,7 +11,6 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -59,6 +59,17 @@ export default function BoardListMenuItem() {
   const [drawerOpen, setDrawerOpen] = React.useState(true);
   const [boardsOpen, setBoardsOpen] = React.useState(false);
   const [userOpen, setUserOpen] = React.useState(false);
+  const [boardList, setBoardList] = React.useState([]);
+
+  React.useEffect(() => {
+    axios.get('/boards')
+      .then(response => {
+        setBoardList(response.data.boards);
+      })
+      .catch(error => {
+        console.error('Error fetching board list:', error);
+      });
+  }, []);
 
   return (
     <Drawer variant='permanent' open={drawerOpen}>
@@ -91,32 +102,16 @@ export default function BoardListMenuItem() {
         </ListItemButton>
         <Collapse in={boardsOpen} timeout='auto' unmountOnExit>
           <List component='div' disablePadding dense>
-            <ListItemButton sx={{ pl: 9 }}>
-              <ListItemText
-                primary='boardNome 01'
-                primaryTypographyProps={{ noWrap: true }}
-              />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 9 }}>
-              <ListItemText
-                primary='boardNome 02'
-                primaryTypographyProps={{ noWrap: true }}
-              />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 9 }}>
-              <ListItemText
-                primary='boardNome 03'
-                primaryTypographyProps={{ noWrap: true }}
-              />
-            </ListItemButton>
-            <ListItemButton sx={{ pl: 9 }}>
-              <ListItemText
-                primary='boardNome 04'
-                primaryTypographyProps={{ noWrap: true }}
-              />
-            </ListItemButton>
+            {boardList.map(board => (
+              <ListItemButton key={board.id} sx={{ pl: 9 }}>
+                <ListItemText
+                  primary={board.titulo}
+                  primaryTypographyProps={{ noWrap: true }}
+                />
+              </ListItemButton>
+            ))}
           </List>
-        </Collapse>        
+        </Collapse>
         <AddBoardMenuItem />
         {/* Usuário */}
         <Divider />

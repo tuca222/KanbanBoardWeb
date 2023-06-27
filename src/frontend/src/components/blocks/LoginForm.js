@@ -21,16 +21,16 @@ export default function LoginForm() {
     email: Yup.string().email('Email inválido').required('O email é obrigatório'),
     senha: Yup.string().required('A senha é obrigatória'),
   });
-  
-  const servidor = 'http://localhost:3000' // Define a porta do servidor
+
+  const servidor = 'http://localhost:3333' // Define a porta do servidor
   const navigate = useNavigate(); // Navegação usando react
   const iconColor = grey[800]; // Cor do ícone
-  
+
   // Função de callback quando o usuário clica em 'entrar'
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
       // Enviar request ao servidor
-      const response = await axios.post(`${servidor}/login/`, values);
+      const response = await axios.post(`${servidor}/login/`, values, { withCredentials: true });
       console.log(response.data);
 
       // Redirecionar para a rota certa (userId)

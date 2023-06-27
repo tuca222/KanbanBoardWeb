@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -20,6 +21,8 @@ import AddBoardMenuItem from './AddBoardMenuItem';
 import EditUserMenuItem from './EditUserMenuItem';
 import LogoutMenuItem from './LogoutMenuItem';
 
+
+const servidor = 'http://localhost:3333'
 const drawerWidth = 260;
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
@@ -60,9 +63,11 @@ export default function BoardListMenuItem() {
   const [boardsOpen, setBoardsOpen] = React.useState(false);
   const [userOpen, setUserOpen] = React.useState(false);
   const [boardList, setBoardList] = React.useState([]);
+  
+  let { userId } = useParams();
 
   React.useEffect(() => {
-    axios.get('/boards')
+    axios.get('/boards', { withCredentials: true })
       .then(response => {
         setBoardList(response.data.boards);
       })
@@ -101,11 +106,12 @@ export default function BoardListMenuItem() {
           {boardsOpen ? <ExpandLess /> : <ExpandMore />}
         </ListItemButton>
         <Collapse in={boardsOpen} timeout='auto' unmountOnExit>
-          <List component='div' disablePadding dense>
-            {boardList.map(board => (
+          <List component='div' disablePadding dense>            
+            {boardList.length === 0 ? (console.log("array vazio")) :
+            boardList.map(board => (
               <ListItemButton key={board.id} sx={{ pl: 9 }}>
                 <ListItemText
-                  primary={board.titulo}
+                  primary={board.tituloBoard}
                   primaryTypographyProps={{ noWrap: true }}
                 />
               </ListItemButton>

@@ -104,7 +104,7 @@ router.get('/private', (request, response) => {
 
 //----------ROTAS Boards----------
 // HTTP GET ALL BOARDS 
-router.get('/users/:id/boards',authenticated, (request, response) => {
+router.get('/users/:id/boards', authenticated, (request, response) => {
   getAllBoardsController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro na leitura dos Boards ' + Error.message})
   })

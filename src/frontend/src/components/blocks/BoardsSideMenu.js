@@ -67,7 +67,7 @@ export default function BoardListMenuItem() {
   let { userId } = useParams();
 
   React.useEffect(() => {
-    axios.get('/boards', { withCredentials: true })
+    axios.get(`${servidor}/users/${userId}/boards`)
       .then(response => {
         setBoardList(response.data.boards);
       })
@@ -126,7 +126,7 @@ export default function BoardListMenuItem() {
             <AccountCircleIcon />
           </ListItemIcon>
           <ListItemText
-            primary='Nome do Usuário'
+            primary="Minha Conta"
             primaryTypographyProps={{ noWrap: true }}
           />
           {userOpen ? <ExpandLess /> : <ExpandMore />}

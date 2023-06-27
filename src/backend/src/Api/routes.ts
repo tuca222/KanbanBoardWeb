@@ -63,28 +63,28 @@ router.post('/users', (request, response) => {
 
 //HTTP GET USER
 //rota privada (ReadUser) - página inicial do usuário
-router.get('/users/:id', authenticated, (request, response) => {
+router.get('/users/:id',  (request, response) => {
   readUserController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro em buscar as informações do usuário: ' + Error.message});
   });
 });
 
 //HTTP PATCH USER
-router.patch('/users/:id', authenticated, (request, response) => {
+router.patch('/users/:id',  (request, response) => {
   updateUserController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Errro ao atualizar os dados do usuário: ' + Error.message});
   });
 });
 
 //HTTP DELETE USER
-router.delete('/users/:id', authenticated, (request, response) => {
+router.delete('/users/:id',  (request, response) => {
   deleteUserController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro em excluir usuário: ' + Error.message});
   });
 });
 
 //rota privada (Logout)
-router.get('/logout', authenticated, (request, response) => {
+router.get('/logout',  (request, response) => {
   try{
     request.session.destroy();
     return response.status(200).json({msg: 'Sessão do usuário encerrada!'})
@@ -104,49 +104,49 @@ router.get('/private', (request, response) => {
 
 //----------ROTAS Boards----------
 // HTTP GET ALL BOARDS 
-router.get('/users/:id/boards', authenticated, (request, response) => {
+router.get('/users/:id/boards', (request, response) => {
   getAllBoardsController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro na leitura dos Boards ' + Error.message})
   })
 })
 
 // HTTP GET BOARD -- READ BOARD
-router.get('/users/:userId/boards/:boardId', authenticated, (request, response) => {
+router.get('/users/:userId/boards/:boardId',  (request, response) => {
   readBoardController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro na leitura do Board: ' + Error.message})
   })
 })
 
 // HTTP POST BOARD
-router.post('/users/:id/boards', authenticated, (request, response) => {
+router.post('/users/:id/boards',  (request, response) => {
   createBoardController.handle(request,response).catch((Error)  => {
     return response.status(400).json({msg: 'Erro na criação do Board: ' + Error.message});
   });
 });
 
 // HTTP UPDATE BOARD
-router.patch('/users/:userId/boards/:boardId', authenticated, (request, response) => {
+router.patch('/users/:userId/boards/:boardId',  (request, response) => {
   updateBoardController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro ao atualizar Board: ' + Error.message});
   });
 });
 
 // HTTP SHARE BOARD ---- COMPARTILHAR
-router.post('/users/:userId/boards/:boardId/share', authenticated, (request, response) => {
+router.post('/users/:userId/boards/:boardId/share',  (request, response) => {
   shareBoardController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro ao compartilhar Board: ' + Error.message});
   });
 });
 
 // HTTP EDITORES BOARD -- Quem possui acesso ao Board
-router.get('/users/:userId/boards/:boardId/editores', authenticated, (request, response) => {
+router.get('/users/:userId/boards/:boardId/editores',  (request, response) => {
   getEditoresBoardController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro ao verificar os usuários com acesso ao Board: ' + Error.message});
   });
 });
 
 // HTTP DELETE BOARD
-router.delete('/users/:userId/boards/:boardId', authenticated, (request, response) => {
+router.delete('/users/:userId/boards/:boardId',  (request, response) => {
   deleteBoardController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro ao deletar Board: ' + Error.message});
   });
@@ -155,25 +155,25 @@ router.delete('/users/:userId/boards/:boardId', authenticated, (request, respons
 
 //----------ROTAS Cards----------
 // HTTP POST CARD
-router.post('/users/:userId/boards/:boardId/cards', authenticated, (request, response) => {
+router.post('/users/:userId/boards/:boardId/cards',  (request, response) => {
   createCardController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro em criar card: ' + Error.message});
   });
 });
 
-router.get('/users/:userId/boards/:boardId/cards/:cardId', authenticated, (request, response) => {
+router.get('/users/:userId/boards/:boardId/cards/:cardId',  (request, response) => {
   readCardController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro em ler card: ' + Error.message});
   });
 });
 
-router.patch('/users/:userId/boards/:boardId/cards/:cardId', authenticated, (request, response) => {
+router.patch('/users/:userId/boards/:boardId/cards/:cardId',  (request, response) => {
   updateCardController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro em alterar card: ' + Error.message});
   });
 })
 
-router.delete('/users/:userId/boards/:boardId/cards/:cardId', authenticated, (request, response) => {
+router.delete('/users/:userId/boards/:boardId/cards/:cardId',  (request, response) => {
   deleteCardController.handle(request, response).catch((Error) => {
     return response.status(400).json({msg: 'Erro em excluir card: ' + Error.message});
   });

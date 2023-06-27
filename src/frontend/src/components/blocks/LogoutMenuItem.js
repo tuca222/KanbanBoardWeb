@@ -33,7 +33,7 @@ export default function LogoutMenuItem() {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancelar</Button>
-          <Button onClick={handleClose}>Sair</Button>
+          <Button href='/logout'>Sair</Button>
         </DialogActions>
       </Dialog>
     </React.Fragment>

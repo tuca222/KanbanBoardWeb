@@ -1,5 +1,6 @@
 import * as React from 'react';
 import CssBaseline from '@mui/material/CssBaseline';
+import { useParams, useNavigate } from 'react-router-dom';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import axios from 'axios';
 import Box from '@mui/material/Box';
@@ -18,12 +19,107 @@ import DeleteBoardButton from './DeleteBoardButton';
 
 export default function KanbanBoard() {
 
-  const servidor = 'http://localhost:3333' // Define a porta do servidor  
-  const [columns, setColumns] = React.useState([]); // Inicializar a lista de colunas do board
+  const servidor = 'http://localhost:3333' // Define a porta do servidor 
+  
+  const [columns, setColumns] = React.useState({
+    column1: {
+      id: 'column1',
+      title: 'PENDENTES',
+      color: '#ef5350',
+      cards: [
+        {
+          id: 'tarefa1',
+          name: 'Tarefa 01',
+          description: 'Breve descrição da tarefa',
+          content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.',
+          index: 0,
+          author: 'Fulano da Silva',
+          deadline: '07/10/1978',
+          taskColor: '#ef5350'
+        },
+        {
+          id: 'tarefa2',
+          name: 'Tarefa 02',
+          description: 'Breve descrição da tarefa',
+          content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.',
+          index: 1,
+          author: 'Fulano da Silva',
+          deadline: '07/10/1978',
+          taskColor: '#ef5350'
+        },
+        {
+          id: 'tarefa3',
+          name: 'Tarefa 03',
+          description: 'Breve descrição da tarefa',
+          content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.',
+          index: 2,
+          author: 'Fulano da Silva',
+          deadline: '07/10/1978',
+          taskColor: '#ef5350'
+        },
+      ],
+    },
+    column2: {
+      id: 'column2',
+      title: 'EM ANDAMENTO',
+      color: '#ff9800',
+      cards: [
+        {
+          id: 'tarefa4',
+          name: 'Tarefa 04',
+          description: 'Breve descrição da tarefa',
+          content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.',
+          index: 3,
+          author: 'Fulano da Silva',
+          deadline: '07/10/1978',
+          taskColor: '#ff9800'
+        },
+        {
+          id: 'tarefa5',
+          name: 'Tarefa 05',
+          description: 'Breve descrição da tarefa',
+          content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.',
+          index: 4,
+          author: 'Fulano da Silva',
+          deadline: '07/10/1978',
+          taskColor: '#ff9800'
+        },
+      ],
+    },
+    column3: {
+      id: 'column3',
+      title: 'REVISADAS',
+      color: '#03a9f4',
+      cards: [
+        {
+          id: 'tarefa6',
+          name: 'Tarefa 06',
+          description: 'Breve descrição da tarefa',
+          content: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.',
+          index: 5,
+          author: 'Fulano da Silva',
+          deadline: '07/10/1978',
+          taskColor: '#03a9f4'
+        },
+      ],
+    },
+    column4: {
+      id: 'column4',
+      title: 'FINALIZADAS',
+      color: '#4caf50',
+      cards: [
+      ],
+    },
+  });
 
+  // const [columns, setColumns] = React.useState([]); // Inicializar a lista de colunas do board
+  const navigate = useNavigate(); // Navegação usando react  
+  let { userId } = useParams();
+
+  
   const fetchColumns = async () => {
     try {
-      const response = await axios.get(`${servidor}/users/boards`);
+      const response = await axios.get(`${servidor}/users/${userId}/boards`);
       setColumns(response.boards[0]);
     } catch (error) {
       console.error('Error fetching columns:', error);

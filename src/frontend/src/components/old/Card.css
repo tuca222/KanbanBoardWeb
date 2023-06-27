@@ -1,9 +1,0 @@
-.card {
-  background-color: #ffffff;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-  padding: 8px;
-  margin-bottom: 8px;
-  word-break: break-word; /* Quebra de palavra para evitar que o conteúdo transborde */
-  max-width: 100%; /* Largura máxima de 100% para se ajustar ao contêiner pai */
-}

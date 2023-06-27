@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import CardTarefa from '../blocks/CardTarefa';
 import AddCardButton from '../blocks/AddCardButton';
-import BoardSideMenu from '../blocks/BoardSideMenu';
+import BoardSideMenu from '../blocks/BoardsSideMenu';
 import BoardUsersList from '../blocks/BoardUsersList';
 import AddUserButton from '../blocks/AddUserButton';
 import EditBoardButton from '../blocks/EditBoardButton';
@@ -228,6 +228,8 @@ export default function KanbanBoard() {
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
+
+      {/* Menu Lateral */}
       <BoardSideMenu />
 
       {/* Kanban Board */}
@@ -247,7 +249,7 @@ export default function KanbanBoard() {
           <Grid component='main' container spacing={4} sx={{ p: 4 }}>
             <Grid item xs={12}>
               <Stack direction="row" spacing={1} alignItems="center">
-                <Typography variant='h4' component='h1' sx={{ pr: 4 }}>Nome do Board</Typography>
+                <Typography variant='h4' component='h1' sx={{ pr: 4 }}>Projeto Web</Typography>
                 <DeleteBoardButton />
                 <EditBoardButton />
               </Stack>

@@ -10,8 +10,7 @@ import { Link } from 'react-router-dom';
 
 const iconColor = grey[800];
 
-const NotFoundPage = () => {
-
+export default function NotFoundPage() {
   return (
     <Grid item sm={12} md={6} xl={4} component={Paper} elevation={6} square>
       <Box
@@ -42,5 +41,3 @@ const NotFoundPage = () => {
     </Grid >
   );
 };
-
-export default NotFoundPage;

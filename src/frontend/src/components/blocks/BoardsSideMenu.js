@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
+import Link from '@mui/material/Link';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -10,7 +11,6 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Collapse from '@mui/material/Collapse';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import ExpandLess from '@mui/icons-material/ExpandLess';
@@ -93,26 +93,31 @@ export default function BoardListMenuItem() {
           <List component='div' disablePadding dense>
             <ListItemButton sx={{ pl: 9 }}>
               <ListItemText
-                primary='boardNome 01'
+                primary='Projeto Web'
                 primaryTypographyProps={{ noWrap: true }}
-              />
+                href='/'
+                />
             </ListItemButton>
             <ListItemButton sx={{ pl: 9 }}>
               <ListItemText
-                primary='boardNome 02'
+                component={<Link />}
+                primary='Reforma da Casa'
                 primaryTypographyProps={{ noWrap: true }}
-              />
+                href='/users/:userId/boards/reforma'
+                />
             </ListItemButton>
             <ListItemButton sx={{ pl: 9 }}>
               <ListItemText
-                primary='boardNome 03'
+                primary='Plano de Viagem'
                 primaryTypographyProps={{ noWrap: true }}
-              />
+                href='/viagem'
+                />
             </ListItemButton>
             <ListItemButton sx={{ pl: 9 }}>
               <ListItemText
-                primary='boardNome 04'
+                primary='Família'
                 primaryTypographyProps={{ noWrap: true }}
+                href='/familia'
               />
             </ListItemButton>
           </List>
@@ -125,7 +130,7 @@ export default function BoardListMenuItem() {
             <AccountCircleIcon />
           </ListItemIcon>
           <ListItemText
-            primary='Nome do Usuário'
+            primary='Fulano de Tal'
             primaryTypographyProps={{ noWrap: true }}
           />
           {userOpen ? <ExpandLess /> : <ExpandMore />}

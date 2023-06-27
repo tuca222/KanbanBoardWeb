@@ -15,19 +15,17 @@ import Typography from '@mui/material/Typography';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import { grey } from '@mui/material/colors';
 
-
-const LoginForm = () => {
-
+export default function LoginForm() {
   // Schema dos dados do formulário
   const validationSchema = Yup.object().shape({
     email: Yup.string().email('Email inválido').required('O email é obrigatório'),
     senha: Yup.string().required('A senha é obrigatória'),
   });
-
-  const servidor = 'http://localhost:3333' // Define a porta do servidor
+  
+  const servidor = 'http://projetofinal.jacqueline.c.beber.vms.ufsc.br:3333' // Define a porta do servidor
   const navigate = useNavigate(); // Navegação usando react
   const iconColor = grey[800]; // Cor do ícone
-
+  
   // Função de callback quando o usuário clica em 'entrar'
   const handleSubmit = async (values, { setSubmitting }) => {
     try {
@@ -126,5 +124,3 @@ const LoginForm = () => {
     </Grid>
   );
 };
-
-export default LoginForm;

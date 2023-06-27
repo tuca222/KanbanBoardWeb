@@ -26,7 +26,7 @@ export default function SignupForm() {
       .required('A confirmação de senha é obrigatória'),
   });
 
-  const servidor = 'http://localhost:3000' // Define a porta do servidor
+  const servidor = 'http://projetofinal.jacqueline.c.beber.vms.ufsc.br:3333' // Define a porta do servidor
   const navigate = useNavigate(); // Navegação usando react
   const iconColor = grey[800]; // Cor do ícone
 

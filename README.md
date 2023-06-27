@@ -4,7 +4,7 @@
 
 # Sobre o Projeto
  
- Aplicação: (LINK DA APLICACAO RODANDO)
+ Aplicação: http://projetofinal.jacqueline.c.beber.vms.ufsc.br:3000/
  
  Repositório: https://github.com/tuca222/KanbanBoardWeb
 

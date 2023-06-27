@@ -1,9 +1,9 @@
 import * as React from 'react';
-import axios from 'axios';
 import { styled } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import MuiDrawer from '@mui/material/Drawer';
 import List from '@mui/material/List';
+import Link from '@mui/material/Link';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
@@ -59,17 +59,6 @@ export default function BoardListMenuItem() {
   const [drawerOpen, setDrawerOpen] = React.useState(true);
   const [boardsOpen, setBoardsOpen] = React.useState(false);
   const [userOpen, setUserOpen] = React.useState(false);
-  const [boardList, setBoardList] = React.useState([]);
-
-  React.useEffect(() => {
-    axios.get('/boards')
-      .then(response => {
-        setBoardList(response.data.boards);
-      })
-      .catch(error => {
-        console.error('Error fetching board list:', error);
-      });
-  }, []);
 
   return (
     <Drawer variant='permanent' open={drawerOpen}>
@@ -102,16 +91,37 @@ export default function BoardListMenuItem() {
         </ListItemButton>
         <Collapse in={boardsOpen} timeout='auto' unmountOnExit>
           <List component='div' disablePadding dense>
-            {boardList.map(board => (
-              <ListItemButton key={board.id} sx={{ pl: 9 }}>
-                <ListItemText
-                  primary={board.titulo}
-                  primaryTypographyProps={{ noWrap: true }}
+            <ListItemButton sx={{ pl: 9 }}>
+              <ListItemText
+                primary='Projeto Web'
+                primaryTypographyProps={{ noWrap: true }}
+                href='/'
                 />
-              </ListItemButton>
-            ))}
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 9 }}>
+              <ListItemText
+                component={<Link />}
+                primary='Reforma da Casa'
+                primaryTypographyProps={{ noWrap: true }}
+                href='/users/:userId/boards/reforma'
+                />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 9 }}>
+              <ListItemText
+                primary='Plano de Viagem'
+                primaryTypographyProps={{ noWrap: true }}
+                href='/viagem'
+                />
+            </ListItemButton>
+            <ListItemButton sx={{ pl: 9 }}>
+              <ListItemText
+                primary='Família'
+                primaryTypographyProps={{ noWrap: true }}
+                href='/familia'
+              />
+            </ListItemButton>
           </List>
-        </Collapse>
+        </Collapse>        
         <AddBoardMenuItem />
         {/* Usuário */}
         <Divider />
@@ -120,7 +130,7 @@ export default function BoardListMenuItem() {
             <AccountCircleIcon />
           </ListItemIcon>
           <ListItemText
-            primary='Nome do Usuário'
+            primary='Fulano de Tal'
             primaryTypographyProps={{ noWrap: true }}
           />
           {userOpen ? <ExpandLess /> : <ExpandMore />}

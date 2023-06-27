@@ -27,7 +27,7 @@ export class GetAllBoardsUseCase implements IGetAllBoardsUseCase{
 
       return {
         userName: userBD.userName,
-        boardDTO: boardsDTO
+        boards: boardsDTO
       };
     } catch (Error) {
       throw Error;

@@ -4,7 +4,7 @@ import { app } from "./app"
 
 mongoose.connect(connectionString)
   .then(() =>{
-  app.listen(3333);
+  app.listen(3000);
   console.log('Conectou ao banco')
 }).catch((err) => console.log(err))
 
